@@ -2,6 +2,7 @@
 import Swal from 'sweetalert2'
 import { ref ,onMounted} from 'vue';
 import axios from 'axios';
+import router from '@/router';
 import { useRoute } from 'vue-router';
 const route = useRoute()
 const dialog = ref(false);
@@ -33,7 +34,7 @@ const getProject = () => {
 const handleSave = () => {
         const id = route.params.id;
         loading.value = true;
-        axios.patch(`/api/projects/${id}`,project.value)
+        axios.patch(`/api/projects/${id}?name=${project.value.projectName}&description=${project.value.projectDescription}`)
         .then(() => {
             Swal.fire({
                 icon: 'success',
@@ -43,7 +44,7 @@ const handleSave = () => {
             });
             project.value.projectName = '';
             project.value.projectDescription = '';
-            // route.
+            router.push('/')
         })
         .catch((error) => {
             Swal.fire({

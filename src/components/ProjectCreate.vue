@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Navbar from './Navbar.vue';
-
+import router from '@/router';
 const dialog = ref(false);
 const loading = ref(false);
 
@@ -33,7 +33,8 @@ const saveProject = () => {
             });
             project.value.projectName = '';
             project.value.projectDescription = '';
-            // route.
+            router.push('/')
+            
         })
         .catch((error) => {
             Swal.fire({
