@@ -9,6 +9,6 @@ const route = useRoute()
 <template>
     <!-- <DefaultLayout v-if="route.meta.layout === 'default'" /> -->
     <Error v-if="route.meta.layout === 'blank'" />
-  <RouterView />
+    <RouterView />
 </template>
 

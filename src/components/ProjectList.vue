@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import Swal from 'sweetalert2';
+import Default from '@/layouts/Default.vue';
 interface Project {
     id : number,
     name: string,
@@ -19,11 +20,13 @@ const fetchProjects = () => {
             return error;
         });
 };
-const emit = defineEmits(['handleEditValues']);
+const emit = defineEmits(['handleEditValues','showtheproject']);
 const handleEdit = (id:number) => {
     emit('handleEditValues',id)
 }
-
+const showProject = (id:number) =>{
+    emit('showtheproject',id)
+}
 const handleDelete = (id:number) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -69,38 +72,44 @@ const headers = [
 </script>
 
 <template>
-    
-        <v-data-table :items="projects" :headers="headers">
-            <thead>
-            <tr>
-                <th class="text-left">
-                Name
-                </th>
-                <th class="text-left">
-                Description
-                </th>
-                <th>Actions</th>
+            <v-data-table :items="projects" :headers="headers">
+                <thead>
+                <tr>
+                    <th class="text-left">
+                    Name
+                    </th>
+                    <th class="text-left">
+                    Description
+                    </th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+            <tr
+                v-for="item in projects"
+                :key="item.id"
+            >
+                <td>{{ item.name }}</td>
+                <td>{{ item.description }}</td>
+                <td >
+                    <v-btn id="actions" color="info" @clic="showProject(item.id)"><router-link :to="`/show/${item.id}`">View</router-link></v-btn>
+                    <v-btn id="actions" color="success" @clic="handleEdit(item.id)"><router-link :to="`/edit/${item.id}`"><v-icon>mdi-pencil</v-icon></router-link></v-btn>
+                    <v-btn id="actions" color="error" @click="handleDelete(item.id)"><v-icon>mdi-delete</v-icon></v-btn>
+                </td>
             </tr>
-            </thead>
-            <tbody>
-        <tr
-            v-for="item in projects"
-            :key="item.id"
-        >
-            <td>{{ item.name }}</td>
-            <td>{{ item.description }}</td>
-            <td>
-                <v-btn color="info"><router-link :to="`/show/${item.id}`">View</router-link></v-btn>
-                <v-btn color="success" @clic="handleEdit(item.id)"><router-link :to="`/edit/${item.id}`"><v-icon>mdi-pencil</v-icon></router-link></v-btn>
-                <v-btn color="error" @click="handleDelete(item.id)"><v-icon>mdi-delete</v-icon></v-btn>
-            </td>
-        </tr>
-        </tbody>
-        </v-data-table>
+            </tbody>
+            </v-data-table>
 </template>
+
 <style scoped>
 a{
     text-decoration: none;
     color: black;
+}
+th,td{
+    max-width: 200px;
+}
+#actions{
+    margin: 0 .5rem;
 }
 </style>

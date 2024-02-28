@@ -10,18 +10,7 @@ import  ProjectList from '../components/ProjectList.vue'
     <Navbar />
     <v-container class="bg-surface-variant" id="container">
         <v-row no-gutters id="row">
-            <v-col cols="2">
-                <v-sheet class="pa-2 ma-2">
-                    <v-list density="compact" nav>
-                        <RouterLink to="/"><v-list-item prepend-icon="mdi-view-dashboard" title="Home" value="home"></v-list-item></RouterLink>
-                        <RouterLink to="/create">
-                            <v-list-item prepend-icon="mdi-pencil" title="Create" value="about"></v-list-item>
-                        </RouterLink>
-                    </v-list>
-                </v-sheet>
-            </v-col>
-
-            <v-col cols="10">
+            <v-col>
                 <v-sheet class="pa-2 ma-2">
                     <ProjectList />
                 </v-sheet>

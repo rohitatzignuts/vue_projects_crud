@@ -3,6 +3,7 @@ import Swal from 'sweetalert2'
 import { ref ,onMounted} from 'vue';
 import axios from 'axios';
 import router from '@/router';
+import Navbar from './Navbar.vue';
 import { useRoute } from 'vue-router';
 const route = useRoute()
 const dialog = ref(false);
@@ -69,7 +70,7 @@ onMounted(() => {
     <v-container class="bg-surface-variant" id="container">
         <router-link to="/"><v-btn id="btn">Go back Home...</v-btn></router-link>
         <v-form @submit.prevent="handleSave">
-        <v-card prepend-icon="mdi-pencil" title="Create A New Project">
+        <v-card prepend-icon="mdi-pencil" title="Edit A Project">
             <v-card-text>
             <v-row dense>
                 <v-col cols="12">
@@ -91,3 +92,19 @@ onMounted(() => {
         </v-form>
     </v-container>
 </template>
+
+<style scoped>
+#container{
+    min-height : 100vh;
+    padding : 1rem;
+    margin : 0;
+    max-width : 100%    
+}
+#btn{
+    margin: 1rem 0;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+</style>
