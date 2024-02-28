@@ -2,6 +2,7 @@ import axios from 'axios';
 import { ref } from 'vue';
 import Swal from 'sweetalert2';
 import router from '@/router';
+
 export function useLogin(){
     interface UserLogin {
         email: string;
@@ -18,7 +19,7 @@ export function useLogin(){
         axios.post('api/login', registerData.value)
             .then((response: any) => {
                 if (response.data && response.data.token) {
-                    token.value = response.data.token;
+                    localStorage.setItem('token',response.data.token)
                     Swal.fire({
                         icon: 'success',
                         title: 'Logged in successfully!',

@@ -6,7 +6,6 @@ import NotFoundVue from '@/components/NotFound.vue'
 import DefaultVue from '@/layouts/Default.vue'
 import RegisterUserVue from '@/components/RegisterUser.vue'
 import LoginUserVue from '@/components/LoginUser.vue'
-import { useLogin } from '../composables/useLogin.ts'
 
 const routes = [
   { 
@@ -51,12 +50,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const { token } = useLogin();
-    if (to.meta.requiresAuth && !token.value) {
-        next('/register');
-    } else {
-        next();
-    }
+  const token = localStorage.getItem('token');
+  if (to.meta.requiresAuth && !token) {
+      next('/login'); 
+  } else {
+      next(); 
+  }
 });
 
 export default router

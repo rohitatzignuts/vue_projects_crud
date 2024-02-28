@@ -2,37 +2,47 @@
 <script setup lang="ts">
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { useLogin } from '@/composables/useLogin';
 import router from '@/router';
-const {token} = useLogin()
+const token = localStorage.getItem('token')
 const handleLogout = () => {
-    axios.post('api/logout', null, {
-        headers: {
-            Authorization: `Bearer ${token.value}`,
-        }
-    })
-    .then((response: any) => {
-        Swal.fire({
-            icon: 'success',
-            title: 'Logged out successfully!',
-            showConfirmButton: false,   
-            timer: 1500
-        });
-        router.push('/login');
-        return response;
-        
-    })
-    .catch((error: any) => {
-        Swal.fire({
-            icon: 'error',
-            title: 'An Error Occurred!',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        return error;
-    });
-};
+    Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes !'
+        }).then((result) => {
+        if (result.isConfirmed) {
 
+            axios.post('api/logout', null, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            .then((response: any) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Logged out successfully!',
+                    showConfirmButton: false,   
+                    timer: 1500
+                });
+                router.push('/login');
+                localStorage.removeItem('token')
+                return response;
+            })
+            .catch((error: any) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occurred!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                return error;
+            });
+        }
+})
+}
 </script>
 
 <template>

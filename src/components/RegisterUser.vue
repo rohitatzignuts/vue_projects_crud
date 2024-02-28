@@ -18,30 +18,34 @@ const registerData = ref<User>({
 });
 
 const handleRegister = () => {
-    axios.post('api/register',registerData.value)
+    axios.post('api/register', registerData.value)
         .then((response: any) => {
+            if (response.data && response.data.token) {
+                localStorage.setItem('token', response.data.token);
+            }
             Swal.fire({
                 icon: 'success',
                 title: 'User created successfully!',
                 showConfirmButton: false,
                 timer: 1500
-            })
-            registerData.value.name = ''
-            registerData.value.email = ''
-            registerData.value.password = ''
-            registerData.value.password_confirmation = ''
-            return response
+            });
+            registerData.value.name = '';
+            registerData.value.email = '';
+            registerData.value.password = '';
+            registerData.value.password_confirmation = '';
+            return response;
         })
         .catch((error: any) => {
-        Swal.fire({
-            icon: 'error',
-            title: 'An Error Occured!',
-            showConfirmButton: false,
-            timer: 1500
-        })
-        return error
+            Swal.fire({
+                icon: 'error',
+                title: 'An Error Occurred!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            return error;
         });
 }
+
 </script>
 
 <template>
@@ -70,7 +74,7 @@ const handleRegister = () => {
     <v-text-field
     v-model="registerData.password_confirmation"
     label="Confirm Paasword"
-    type="pasword"
+    type="password"
     ></v-text-field>
 
     <v-btn
