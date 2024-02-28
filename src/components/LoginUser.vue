@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import {useLogin} from '../composables/useLogin.ts'
-
 const { registerData, handleLogin } = useLogin();
-
-
 </script>
 
 <template>

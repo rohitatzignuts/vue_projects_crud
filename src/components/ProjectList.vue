@@ -2,7 +2,6 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import Swal from 'sweetalert2';
-import Default from '@/layouts/Default.vue';
 interface Project {
     id : number,
     name: string,

@@ -21,7 +21,7 @@ const vuetify = createVuetify({
     directives,
     theme: {},
     icons : {
-        iconfont: 'mdi'
+        iconfont : 'mdi'
     }
 })
 
