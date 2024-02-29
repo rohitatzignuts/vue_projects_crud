@@ -3,7 +3,6 @@ import Swal from 'sweetalert2'
 import { ref ,onMounted} from 'vue';
 import axios from 'axios';
 import router from '@/router';
-import Navbar from './Navbar.vue';
 import { useRoute } from 'vue-router';
 const route = useRoute()
 const dialog = ref(false);
