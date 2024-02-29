@@ -4,8 +4,11 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import router from '@/router';
 const loading = ref(false);
-
-const project = ref({
+interface Project {
+    projectName : string,
+    projectDescription : string
+}
+const project = ref<Project>({
     projectName: '',
     projectDescription: ''
 });
