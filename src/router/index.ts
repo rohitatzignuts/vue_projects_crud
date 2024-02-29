@@ -6,12 +6,11 @@ import HomeViewVue from '@/views/HomeView.vue'
 import ProjectEditViewVue from '@/views/ProjectEditView.vue'
 import ProjectCreateViewVue from '@/views/ProjectCreateView.vue'
 import ErrorViewVue from '@/views/ErrorView.vue'
-import ErrorVue from '@/layouts/Error.vue'
 import ProjectViewVue from '@/views/ProjectView.vue'
 const routes = [
   { 
     path: '/', 
-    meta: { layout: DefaultVue, requiresAuth: true }, 
+    meta: { layout: 'Default', requiresAuth: true }, 
     component: HomeViewVue,
   },
   { 
