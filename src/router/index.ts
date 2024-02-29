@@ -39,7 +39,7 @@ const routes = [
   },
   { 
     path: '/:pathMatch(.*)*' ,
-    meta: { layout: ErrorVue },  
+    meta: { layout: 'blank' },  
     name: '404', 
     component: ErrorViewVue
   },
