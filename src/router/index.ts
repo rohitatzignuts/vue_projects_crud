@@ -24,17 +24,17 @@ const routes = [
   },
   { 
     path: '/create', 
-    meta: { layout: DefaultVue, requiresAuth: true }, 
+    meta: { layout: 'Default', requiresAuth: true }, 
     component: ProjectCreateViewVue 
   },
   { 
     path: '/edit/:id', 
-    meta: { layout: DefaultVue, requiresAuth: true }, 
+    meta: { layout: 'Default', requiresAuth: true }, 
     component: ProjectEditViewVue 
   },
   { 
     path: '/show/:id', 
-    meta: { layout: DefaultVue, requiresAuth: true }, 
+    meta: { layout: 'Default', requiresAuth: true }, 
     component: ProjectViewVue 
   },
   { 

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-
+import Error from '@/layouts/Error.vue';
 </script>
 <template>
-    <component :is="$route.meta.layout  || 'section' " >
-    </component>
+    <Error />
 </template>

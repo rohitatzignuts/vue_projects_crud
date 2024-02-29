@@ -91,8 +91,8 @@ const headers = [
         <td>{{ item.name }}</td>
         <td>{{ item.description }}</td>
         <td >
-            <router-link :to="`/show/${item.id}`"><v-btn id="actions" color="info" @clic="showProject(item.id)">View</v-btn></router-link>
-            <router-link :to="`/edit/${item.id}`"><v-btn id="actions" color="success" @clic="handleEdit(item.id)"><v-icon>mdi-pencil</v-icon></v-btn></router-link>
+            <router-link :to="`/show/${item.id}`"><v-btn id="actions" color="info" @click="showProject(item.id)">View</v-btn></router-link>
+            <router-link :to="`/edit/${item.id}`"><v-btn id="actions" color="success" @click="handleEdit(item.id)"><v-icon>mdi-pencil</v-icon></v-btn></router-link>
             <v-btn id="actions" color="error" @click="handleDelete(item.id)"><v-icon>mdi-delete</v-icon></v-btn>
         </td>
     </tr>

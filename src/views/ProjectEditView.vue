@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import ProjectEditVue from '@/components/ProjectEdit.vue';
-
+import Default from '@/layouts/Default.vue';
 </script>
 <template>
-    <component :is="$route.meta.layout  || 'section' " >
+    <Default>
         <template #content>
             <ProjectEditVue />
         </template>
-    </component>
+    </Default>
 </template>

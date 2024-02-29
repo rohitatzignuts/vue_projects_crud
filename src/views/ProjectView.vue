@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import ProjectShowVue from '@/components/ProjectShow.vue';
-
+import Default from '@/layouts/Default.vue';
 const route = useRoute()
 const project = ref({
     projectName: '',
@@ -34,11 +34,11 @@ onMounted(() => {
 })
 </script>
 <template>
-    <component :is="$route.meta.layout  || 'section' " >
+    <Default >
         <template #content>
             <ProjectShowVue 
             :project="project"
             />
         </template>
-    </component>
+    </Default>
 </template>

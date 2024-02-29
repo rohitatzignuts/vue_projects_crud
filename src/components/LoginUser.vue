@@ -17,7 +17,7 @@ const { registerData, handleLogin } = useLogin();
 
     <v-text-field
     v-model="registerData.password"
-    label="Paasword"
+    label="Password"
     type="password"
     ></v-text-field>
 
