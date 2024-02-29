@@ -3,6 +3,7 @@
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import router from '@/router';
+import ProjectForm from './ProjectForm.vue';
 
 const token = localStorage.getItem('token')
 const handleLogout = () => {
@@ -55,11 +56,11 @@ const handleLogout = () => {
     <v-col >
     <div id="links">
         <router-link to="/"><v-btn variant="outlined">Home</v-btn></router-link>
-        <router-link to="/create"><v-btn variant="outlined">Create</v-btn></router-link>
+        <ProjectForm value="Create" />
         <v-btn variant="outlined" @click="handleLogout">Logout</v-btn>
     </div>
     </v-col>
-</v-row>
+    </v-row>
 </template>
 
 <style scoped>

@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import Swal from 'sweetalert2';
+import ProjectForm from './ProjectForm.vue';
 
 interface Project {
     id : number,
@@ -22,11 +23,11 @@ const fetchProjects = () => {
 };
 
 const emit = defineEmits(['handleEditValues','showtheproject']);
-const handleEdit = (id:number) => {
-    emit('handleEditValues',id)
-}
 const showProject = (id:number) =>{
     emit('showtheproject',id)
+}
+const handleEdit = (id:number) =>{
+    emit('handleEditValues',id)
 }
 
 const handleDelete = (id:number) => {
@@ -95,7 +96,7 @@ const headers = [
         <td>{{ item.description }}</td>
         <td >
             <router-link :to="`/show/${item.id}`"><v-btn id="actions" color="info" @click="showProject(item.id)">View</v-btn></router-link>
-            <router-link :to="`/edit/${item.id}`"><v-btn id="actions" color="success" @click="handleEdit(item.id)"><v-icon>mdi-pencil</v-icon></v-btn></router-link>
+            <project-form value="Edit" @click="handleEdit(item.id)"/>
             <v-btn id="actions" color="error" @click="handleDelete(item.id)"><v-icon>mdi-delete</v-icon></v-btn>
         </td>
     </tr>

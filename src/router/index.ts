@@ -2,8 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import RegisterUserVue from '@/components/RegisterUser.vue'
 import LoginUserVue from '@/components/LoginUser.vue'
 import HomeViewVue from '@/views/HomeView.vue'
-import ProjectEditViewVue from '@/views/ProjectEditView.vue'
-import ProjectCreateViewVue from '@/views/ProjectCreateView.vue'
 import ErrorViewVue from '@/views/ErrorView.vue'
 import ProjectViewVue from '@/views/ProjectView.vue'
 
@@ -20,16 +18,6 @@ const routes = [
   { 
     path: '/register', 
     component: RegisterUserVue
-  },
-  { 
-    path: '/create', 
-    meta: { layout: 'Default', requiresAuth: true }, 
-    component: ProjectCreateViewVue 
-  },
-  { 
-    path: '/edit/:id', 
-    meta: { layout: 'Default', requiresAuth: true }, 
-    component: ProjectEditViewVue 
   },
   { 
     path: '/show/:id', 
