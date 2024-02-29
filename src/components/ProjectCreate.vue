@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Navbar from './Navbar.vue';
 import router from '@/router';
 const dialog = ref(false);
 const loading = ref(false);
@@ -53,8 +52,7 @@ const saveProject = () => {
 </script>
 
 <template>
-    <Navbar />
-    <v-container class="bg-surface-variant" id="container">
+    <v-container  id="container">
         <router-link to="/"><v-btn id="btn">Go back Home...</v-btn></router-link>
         <v-form @submit.prevent="saveProject">
         <v-card prepend-icon="mdi-pencil" title="Create A New Project">
@@ -81,12 +79,6 @@ const saveProject = () => {
 </template>
 
 <style scoped>
-#container{
-    height : 100vh;
-    padding : 1rem;
-    margin : 0;
-    max-width : 100%    
-}
 #btn{
     margin: 1rem 0;
 }

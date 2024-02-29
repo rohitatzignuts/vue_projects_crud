@@ -71,33 +71,33 @@ const headers = [
 </script>
 
 <template>
-            <v-data-table :items="projects" :headers="headers">
-                <thead>
-                <tr>
-                    <th class="text-left">
-                    Name
-                    </th>
-                    <th class="text-left">
-                    Description
-                    </th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-            <tr
-                v-for="item in projects"
-                :key="item.id"
-            >
-                <td>{{ item.name }}</td>
-                <td>{{ item.description }}</td>
-                <td >
-                    <v-btn id="actions" color="info" @clic="showProject(item.id)"><router-link :to="`/show/${item.id}`">View</router-link></v-btn>
-                    <v-btn id="actions" color="success" @clic="handleEdit(item.id)"><router-link :to="`/edit/${item.id}`"><v-icon>mdi-pencil</v-icon></router-link></v-btn>
-                    <v-btn id="actions" color="error" @click="handleDelete(item.id)"><v-icon>mdi-delete</v-icon></v-btn>
-                </td>
-            </tr>
-            </tbody>
-            </v-data-table>
+    <v-data-table :items="projects" :headers="headers">
+        <thead>
+        <tr>
+            <th class="text-left">
+            Name
+            </th>
+            <th class="text-left">
+            Description
+            </th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+    <tr
+        v-for="item in projects"
+        :key="item.id"
+    >
+        <td>{{ item.name }}</td>
+        <td>{{ item.description }}</td>
+        <td >
+            <router-link :to="`/show/${item.id}`"><v-btn id="actions" color="info" @clic="showProject(item.id)">View</v-btn></router-link>
+            <router-link :to="`/edit/${item.id}`"><v-btn id="actions" color="success" @clic="handleEdit(item.id)"><v-icon>mdi-pencil</v-icon></v-btn></router-link>
+            <v-btn id="actions" color="error" @click="handleDelete(item.id)"><v-icon>mdi-delete</v-icon></v-btn>
+        </td>
+    </tr>
+    </tbody>
+    </v-data-table>
 </template>
 
 <style scoped>

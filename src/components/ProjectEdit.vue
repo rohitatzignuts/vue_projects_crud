@@ -66,8 +66,7 @@ onMounted(() => {
 })
 </script>
 <template>
-    <Navbar />
-    <v-container class="bg-surface-variant" id="container">
+    <v-container  id="container">
         <router-link to="/"><v-btn id="btn">Go back Home...</v-btn></router-link>
         <v-form @submit.prevent="handleSave">
         <v-card prepend-icon="mdi-pencil" title="Edit A Project">
@@ -95,7 +94,6 @@ onMounted(() => {
 
 <style scoped>
 #container{
-    min-height : 100vh;
     padding : 1rem;
     margin : 0;
     max-width : 100%    

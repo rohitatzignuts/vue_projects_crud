@@ -41,7 +41,7 @@ export function useLogin(){
             .catch((error: any) => {
                 Swal.fire({
                     icon: 'error',
-                    title: 'An Error Occurred!',
+                    title: 'Invalid password or email!',
                     showConfirmButton: false,
                     timer: 1500
                 });

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ref } from 'vue';
 import Swal from 'sweetalert2';
 import { RouterLink } from 'vue-router';
+import router from '@/router';
 interface User {
     name: string;
     email: string;
@@ -29,6 +30,7 @@ const handleRegister = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            router.push('/login')
             registerData.value.name = '';
             registerData.value.email = '';
             registerData.value.password = '';
@@ -55,11 +57,13 @@ const handleRegister = () => {
     <v-text-field
     v-model="registerData.name"
     :counter="10"
+    required
     label="Name"
     ></v-text-field>
 
     <v-text-field
     v-model="registerData.email"
+    required
     :counter="7"
     label="E-main"
     type="email"
@@ -67,12 +71,14 @@ const handleRegister = () => {
 
     <v-text-field
     v-model="registerData.password"
+    required
     label="Paasword"
     type="password"
     ></v-text-field>
 
     <v-text-field
     v-model="registerData.password_confirmation"
+    required
     label="Confirm Paasword"
     type="password"
     ></v-text-field>
@@ -83,7 +89,7 @@ const handleRegister = () => {
     >
     submit
     </v-btn>
-    Already a user ? <v-btn variant="plain"><RouterLink to="/login">Login</RouterLink></v-btn>
+    Already a user?<v-btn variant="plain"><RouterLink to="/login">Login</RouterLink></v-btn>
     </form>
     </v-container>
 </template>

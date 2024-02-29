@@ -46,26 +46,23 @@ const handleLogout = () => {
 </script>
 
 <template>
-    <nav>
-        <div>
-            <h1>Project Master</h1>
-        </div>
-        <div id="links">
-            <v-btn variant="outlined"><router-link to="/">Home</router-link></v-btn>
-            <v-btn variant="outlined"><router-link to="/create">Create</router-link></v-btn>
-            <v-btn variant="outlined" @click="handleLogout">Logout</v-btn>
-        </div>
-    </nav>
+    <v-row justify="space-between" align="center" class="pa-14 ma-2">
+    <v-col >
+    <div>
+        <router-link to="/"><h1>Project Master</h1></router-link>
+    </div>
+    </v-col>
+    <v-col >
+    <div id="links">
+        <router-link to="/"><v-btn variant="outlined">Home</v-btn></router-link>
+        <router-link to="/create"><v-btn variant="outlined">Create</v-btn></router-link>
+        <v-btn variant="outlined" @click="handleLogout">Logout</v-btn>
+    </div>
+    </v-col>
+</v-row>
 </template>
 
 <style scoped>
-nav{
-    padding : 16px 18px;
-    margin : 12px;
-    text-align : center;
-    display: flex;
-    justify-content: space-between;
-}
 a{
     text-decoration: none;
     color: white;

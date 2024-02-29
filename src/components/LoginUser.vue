@@ -27,6 +27,15 @@ const { registerData, handleLogin } = useLogin();
     >
     submit
     </v-btn>
+    Not a user ?...
+    <v-btn
+    class="me-4"
+    type="submit"
+    variant="plain"
+    color="white"
+    >
+    <router-link to="/register">Register</router-link>
+    </v-btn>
     </form>
     </v-container>
 </template>

@@ -1,46 +1,47 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ProjectCreateVue from '@/components/ProjectCreate.vue'
-import ProjectEditVue from '@/components/ProjectEdit.vue'
-import ProjectShowVue from '@/components/ProjectShow.vue'
-import NotFoundVue from '@/components/NotFound.vue'
 import DefaultVue from '@/layouts/Default.vue'
 import RegisterUserVue from '@/components/RegisterUser.vue'
 import LoginUserVue from '@/components/LoginUser.vue'
-
+import HomeViewVue from '@/views/HomeView.vue'
+import ProjectEditViewVue from '@/views/ProjectEditView.vue'
+import ProjectCreateViewVue from '@/views/ProjectCreateView.vue'
+import ErrorViewVue from '@/views/ErrorView.vue'
+import ErrorVue from '@/layouts/Error.vue'
+import ProjectViewVue from '@/views/ProjectView.vue'
 const routes = [
   { 
     path: '/', 
-    meta: { layout: 'default', requiresAuth: true }, // Add requiresAuth: true for authenticated routes
-    component: DefaultVue,
-  },
-  { 
-    path: '/register', 
-    component: RegisterUserVue
+    meta: { layout: DefaultVue, requiresAuth: true }, 
+    component: HomeViewVue,
   },
   { 
     path: '/login', 
     component: LoginUserVue
   },
   { 
+    path: '/register', 
+    component: RegisterUserVue
+  },
+  { 
     path: '/create', 
-    meta: { layout: 'default', requiresAuth: true }, // Add requiresAuth: true for authenticated routes
-    component: ProjectCreateVue 
+    meta: { layout: DefaultVue, requiresAuth: true }, 
+    component: ProjectCreateViewVue 
   },
   { 
     path: '/edit/:id', 
-    meta: { layout: 'default', requiresAuth: true }, // Add requiresAuth: true for authenticated routes
-    component: ProjectEditVue 
+    meta: { layout: DefaultVue, requiresAuth: true }, 
+    component: ProjectEditViewVue 
   },
   { 
     path: '/show/:id', 
-    meta: { layout: 'default', requiresAuth: true }, // Add requiresAuth: true for authenticated routes
-    component: ProjectShowVue 
+    meta: { layout: DefaultVue, requiresAuth: true }, 
+    component: ProjectViewVue 
   },
   { 
     path: '/:pathMatch(.*)*' ,
-    meta: { layout: 'blank' },  
+    meta: { layout: ErrorVue },  
     name: '404', 
-    component: NotFoundVue
+    component: ErrorViewVue
   },
 ]
 
