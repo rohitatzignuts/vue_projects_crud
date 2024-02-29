@@ -11,7 +11,7 @@ import ProjectViewVue from '@/views/ProjectView.vue'
 const routes = [
   { 
     path: '/', 
-    meta: { layout: 'Default', requiresAuth: true }, 
+    meta: { layout: DefaultVue, requiresAuth: true }, 
     component: HomeViewVue,
   },
   { 
