@@ -14,7 +14,6 @@ const handleLogout = () => {
             confirmButtonText: 'Yes !'
         }).then((result) => {
         if (result.isConfirmed) {
-
             axios.post('api/logout', null, {
                 headers: {
                     Authorization: `Bearer ${token}`,

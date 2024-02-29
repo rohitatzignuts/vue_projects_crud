@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import router from '@/router';
-const dialog = ref(false);
 const loading = ref(false);
 
 const project = ref({
@@ -46,7 +45,6 @@ const saveProject = () => {
         })
         .finally(() => {
             loading.value = false;
-            dialog.value = false;
         });
 };
 </script>
@@ -70,7 +68,7 @@ const saveProject = () => {
             <v-divider></v-divider>
             <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn text="Close" variant="plain" @click="dialog = false"></v-btn>
+            <router-link to="/"><v-btn text="Close" variant="plain" ></v-btn></router-link>
             <v-btn color="primary" text="Save" type="submit" :disabled="loading"></v-btn>
             </v-card-actions>
         </v-card>
