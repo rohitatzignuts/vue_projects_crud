@@ -31,7 +31,7 @@ const handleRegister = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
-            router.push('/login')
+            router.push('/')
             registerData.value.name = '';
             registerData.value.email = '';
             registerData.value.password = '';

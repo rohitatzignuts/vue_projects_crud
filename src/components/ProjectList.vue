@@ -1,118 +1,80 @@
 <script setup lang="ts">
-import axios from 'axios';
 import { ref, onMounted } from 'vue';
+import axios from 'axios';
 import Swal from 'sweetalert2';
 import ProjectForm from './ProjectForm.vue';
+import ProjectShow from './ProjectShow.vue';
 
-interface Project {
-    id : number,
-    name: string,
-    description: string,
-}
-const projects = ref<Array<Project>>([]);
+const search = ref('');
+const projects = ref([]);
+const headers = [
+{ text: 'Name', value: 'name' },
+{ text: 'Description', value: 'description' },
+{ text: 'Actions', value: 'actions', sortable: false },
+];
+
 const fetchProjects = () => {
-    axios.get('/api/projects')
-        .then(res => {
-            projects.value = res.data;
-            return res;
-        })
-        .catch(error => {
-            console.log(error);
-            return error;
-        });
+axios.get('/api/projects')
+    .then(res => {
+    projects.value = res.data;
+    })
+    .catch(error => {
+    console.error(error);
+    });
 };
 
-const emit = defineEmits(['handleEditValues','showtheproject']);
-const showProject = (id:number) =>{
-    emit('showtheproject',id)
-}
-const handleEdit = (id:number) =>{
-    emit('handleEditValues',id)
-}
-
-const handleDelete = (id:number) => {
+const handleDelete = (id) => {
+Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+    if (result.isConfirmed) {
+    axios.delete(`/api/projects/${id}`)
+        .then(() => {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-        if (result.isConfirmed) {
-            axios.delete(`/api/projects/${id}`)
-            .then( response => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Project deleted successfully!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                fetchProjects();
-                return response
-            })
-            .catch(error => {
-                Swal.fire({
-                        icon: 'error',
-                    title: 'An Error Occured!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                return error
-            });
-        }
+            icon: 'success',
+            title: 'Project deleted successfully!',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        fetchProjects();
         })
-}
+        .catch(() => {
+        Swal.fire({
+            icon: 'error',
+            title: 'An Error Occurred!',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        });
+    }
+});
+};
 
 onMounted(() => {
-    fetchProjects();
+fetchProjects();
 });
-const headers = [
-    { text: 'Name', value: 'name' },
-    { text: 'Description', value: 'description' }
-];
 </script>
 
 <template>
-    <v-data-table :items="projects" :headers="headers">
-        <thead>
-        <tr>
-            <th class="text-left">
-            Name
-            </th>
-            <th class="text-left">
-            Description
-            </th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-    <tr
-        v-for="item in projects"
-        :key="item.id"
-    >
-        <td>{{ item.name }}</td>
-        <td>{{ item.description }}</td>
-        <td >
-            <router-link :to="`/show/${item.id}`"><v-btn id="actions" color="info" @click="showProject(item.id)">View</v-btn></router-link>
-            <project-form value="Edit" @click="handleEdit(item.id)"/>
-            <v-btn id="actions" color="error" @click="handleDelete(item.id)"><v-icon>mdi-delete</v-icon></v-btn>
-        </td>
-    </tr>
-    </tbody>
-    </v-data-table>
-</template>
-
-<style scoped>
-a{
-    text-decoration: none;
-    color: black;
-}
-th,td{
-    max-width: 200px;
-}
-#actions{
-    margin: 0 .5rem;
-}
-</style>
+    <div>
+        <v-text-field v-model="search" label="Search" />
+        <v-data-table :items="projects" :headers="headers" :search="search">
+            <template #item.project="{ item }">
+                <project-show :project="item" />
+            </template>
+            <template #item.actions="{ item }">
+                <project-show :project="item" />
+                <project-form :exprojectId="item.id" value="Edit" />
+                <v-btn @click="handleDelete(item.id)" color="error">
+                <v-icon>mdi-delete</v-icon>
+                </v-btn>
+            </template>
+        </v-data-table>
+    </div>
+    </template>

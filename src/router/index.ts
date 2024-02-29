@@ -3,7 +3,6 @@ import RegisterUserVue from '@/components/RegisterUser.vue'
 import LoginUserVue from '@/components/LoginUser.vue'
 import HomeViewVue from '@/views/HomeView.vue'
 import ErrorViewVue from '@/views/ErrorView.vue'
-import ProjectViewVue from '@/views/ProjectView.vue'
 
 const routes = [
   { 
@@ -18,11 +17,6 @@ const routes = [
   { 
     path: '/register', 
     component: RegisterUserVue
-  },
-  { 
-    path: '/show/:id', 
-    meta: { layout: 'Default', requiresAuth: true }, 
-    component: ProjectViewVue 
   },
   { 
     path: '/:pathMatch(.*)*' ,
