@@ -6,6 +6,7 @@ import ProjectEditViewVue from '@/views/ProjectEditView.vue'
 import ProjectCreateViewVue from '@/views/ProjectCreateView.vue'
 import ErrorViewVue from '@/views/ErrorView.vue'
 import ProjectViewVue from '@/views/ProjectView.vue'
+
 const routes = [
   { 
     path: '/', 

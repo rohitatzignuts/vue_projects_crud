@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import ProjectShowVue from '@/components/ProjectShow.vue';
 import Default from '@/layouts/Default.vue';
+
 const route = useRoute()
 const project = ref({
     projectName: '',
@@ -29,10 +30,12 @@ const getProject = () => {
         return error
     })
 }
+
 onMounted(() => {
     getProject()
 })
 </script>
+
 <template>
     <Default >
         <template #content>

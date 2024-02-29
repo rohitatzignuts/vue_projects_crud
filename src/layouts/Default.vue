@@ -1,9 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import Navbar from '@/components/Navbar.vue'
-// import {RouterLink} from 'vue-router'
-// import  ProjectCreate from '../components/ProjectCreate.vue'
-// import  ProjectList from '../components/ProjectList.vue'
 </script>
 
 <template>
@@ -13,7 +10,6 @@ import Navbar from '@/components/Navbar.vue'
         prominent>
         <Navbar />
     </v-app-bar>
-
     <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
         <slot name="content" />
     </v-main>

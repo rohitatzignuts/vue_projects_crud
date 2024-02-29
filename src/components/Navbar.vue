@@ -3,6 +3,7 @@
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import router from '@/router';
+
 const token = localStorage.getItem('token')
 const handleLogout = () => {
     Swal.fire({

@@ -7,6 +7,7 @@
         </div>
     </v-container>
 </template>
+
 <style scoped>
 .container{
     display: flex;

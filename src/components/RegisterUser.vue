@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import Swal from 'sweetalert2';
 import { RouterLink } from 'vue-router';
 import router from '@/router';
+
 interface User {
     name: string;
     email: string;

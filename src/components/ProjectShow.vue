@@ -1,13 +1,8 @@
 <script setup lang="ts">
-
-interface Project{
-    projectName : string,
-    projectDescription : string
-}
+import type Project from '@/project'
 defineProps<{
     project : Project
 }>()
-
 </script>
 
 <template>

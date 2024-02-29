@@ -3,11 +3,9 @@ import { ref } from 'vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import router from '@/router';
+import type Project from '@/project'
 const loading = ref(false);
-interface Project {
-    projectName : string,
-    projectDescription : string
-}
+
 const project = ref<Project>({
     projectName: '',
     projectDescription: ''

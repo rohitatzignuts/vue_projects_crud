@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import Swal from 'sweetalert2';
+
 interface Project {
     id : number,
     name: string,
@@ -19,6 +20,7 @@ const fetchProjects = () => {
             return error;
         });
 };
+
 const emit = defineEmits(['handleEditValues','showtheproject']);
 const handleEdit = (id:number) => {
     emit('handleEditValues',id)
@@ -26,6 +28,7 @@ const handleEdit = (id:number) => {
 const showProject = (id:number) =>{
     emit('showtheproject',id)
 }
+
 const handleDelete = (id:number) => {
         Swal.fire({
             title: 'Are you sure?',

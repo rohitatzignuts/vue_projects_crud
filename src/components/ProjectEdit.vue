@@ -4,11 +4,12 @@ import { ref ,onMounted} from 'vue';
 import axios from 'axios';
 import router from '@/router';
 import { useRoute } from 'vue-router';
+import type Project from '@/project'
+
 const route = useRoute()
 const dialog = ref(false);
 const loading = ref(false);
-
-const project = ref({
+const project = ref<Project>({
     projectName: '',
     projectDescription: ''
 });
