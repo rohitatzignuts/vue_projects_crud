@@ -9,6 +9,20 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
+import { createI18n } from "vue-i18n";
+import en from './language/en-US.json'
+import sp from './language/sp-SP.json'
+
+// i18n
+const i18n = createI18n({
+    legacy: false,
+    locale: localStorage.getItem("locale") ?? "en-US",
+    fallbackLocale: "en-US",
+    messages: {
+    "en-US": en,
+    "sp-SP": sp
+}
+});
 
 // axios
 axios.defaults.baseURL = "https://mock-api.binaryboxtuts.com/"
@@ -34,3 +48,4 @@ const app = createApp(App)
 app.use(vuetify)
 app.use(router)
 app.mount('#app')
+app.use(i18n)

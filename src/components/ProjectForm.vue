@@ -61,6 +61,7 @@ const saveProject = () => {
         showConfirmButton: false,
         timer: 1500
       })
+
       project.value.projectName = ''
       project.value.projectDescription = ''
       dialog.value = false
@@ -85,7 +86,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="text-center d-inline">
+  <div class="text-center d-inline" >
     <v-dialog v-model="dialog" max-width="600">
       <template #activator="{ props: activatorProps }">
         <v-btn :text="value" variant="outlined" v-bind="activatorProps"></v-btn>

@@ -8,20 +8,17 @@ const { registerData, handleLogin } = useLogin();
     <v-container id="container">
     <h1>Login</h1>
     <form @submit.prevent="handleLogin">
-
     <v-text-field
     v-model="registerData.email"
     :counter="7"
     label="E-main"
     type="email"
     ></v-text-field>
-
     <v-text-field
     v-model="registerData.password"
     label="Password"
     type="password"
     ></v-text-field>
-
     <v-btn
     class="me-4"
     type="submit"
