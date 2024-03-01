@@ -52,47 +52,53 @@ const handleRegister = () => {
 </script>
 
 <template>
-    <v-container id="container">
-    <h1>Register</h1>
-    <form @submit.prevent="handleRegister">
-    <v-text-field
-    v-model="registerData.name"
-    :counter="10"
-    required
-    label="Name"
-    ></v-text-field>
+    <v-container id="container" class="d-flex justify-center align-center">
+    <v-sheet class="mx-auto pa-10" width="500">    
+    <v-row>
+    <v-col cols="12">
+        <h1>Register...</h1>
+        <form @submit.prevent="handleRegister">
+        <v-text-field
+            v-model="registerData.name"
+            :counter="10"
+            required
+            label="Name"
+        ></v-text-field>
 
-    <v-text-field
-    v-model="registerData.email"
-    required
-    :counter="7"
-    label="E-main"
-    type="email"
-    ></v-text-field>
+        <v-text-field
+            v-model="registerData.email"
+            required
+            :counter="7"
+            label="E-mail"
+            type="email"
+        ></v-text-field>
 
-    <v-text-field
-    v-model="registerData.password"
-    required
-    label="Paasword"
-    type="password"
-    ></v-text-field>
+        <v-text-field
+            v-model="registerData.password"
+            required
+            label="Password"
+            type="password"
+        ></v-text-field>
 
-    <v-text-field
-    v-model="registerData.password_confirmation"
-    required
-    label="Confirm Paasword"
-    type="password"
-    ></v-text-field>
+        <v-text-field
+            v-model="registerData.password_confirmation"
+            required
+            label="Confirm Password"
+            type="password"
+        ></v-text-field>
 
-    <v-btn
-    class="me-4"
-    type="submit"
-    >
-    submit
-    </v-btn>
-    Already a user?<v-btn variant="plain"><RouterLink to="/login">Login</RouterLink></v-btn>
-    </form>
-    </v-container>
+        <v-btn
+            class="me-4"
+            type="submit"
+        >
+            Register !
+        </v-btn>
+        Already a user?<v-btn variant="plain"><RouterLink to="/login">Login</RouterLink></v-btn>
+        </form>
+    </v-col>
+    </v-row>
+    </v-sheet>
+</v-container>
 </template>
 
 <style>
