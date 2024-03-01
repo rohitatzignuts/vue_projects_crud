@@ -3,12 +3,10 @@
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import router from '@/router'
-import ProjectForm from './ProjectForm.vue'
 import { watch } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t, locale } = useI18n();
-const creatText = t("Create")
 const token = localStorage.getItem('token')
 const handleLogout = () => {
   Swal.fire({
@@ -55,16 +53,16 @@ watch(locale, (newlocale) => {
 </script>
 
 <template>
-  <v-row justify="space-between" align="center" class="pa-14 ma-2">
-    <v-col>
+  <vRow justify="space-between" align="center" class="pa-14 ma-2">
+    <vCol>
       <div>
         <router-link to="/"><h1>{{t("Project Master")}}</h1></router-link>
       </div>
-    </v-col>
-    <v-col>
+    </vCol>
+    <vCol>
       <div id="links">
         <router-link to="/"><v-btn variant="outlined">{{t("Home")}}</v-btn></router-link>
-        <ProjectForm :value=creatText />
+        
         <v-btn variant="outlined" @click="handleLogout">{{t("Logout")}}</v-btn>
         <div>
           <select v-model="locale">
@@ -73,8 +71,8 @@ watch(locale, (newlocale) => {
           </select>
           </div>
       </div>
-    </v-col>
-  </v-row>
+    </vCol>
+  </vRow>
 </template>
 
 <style scoped>

@@ -48,57 +48,56 @@ const handleRegister = () => {
             return error;
         });
 }
-
 </script>
 
 <template>
-    <v-container id="container" class="d-flex justify-center align-center">
-    <v-sheet class="mx-auto pa-10" width="500">    
-    <v-row>
-    <v-col cols="12">
+    <VContainer id="container" class="d-flex justify-center align-center">
+    <VSheet class="mx-auto pa-10" width="500">    
+    <VRow>
+    <VCol cols="12">
         <h1>Register...</h1>
         <form @submit.prevent="handleRegister">
-        <v-text-field
+        <VTextField
             v-model="registerData.name"
             :counter="10"
             required
             label="Name"
-        ></v-text-field>
+        ></VTextField>
 
-        <v-text-field
+        <VTextField
             v-model="registerData.email"
             required
             :counter="7"
             label="E-mail"
             type="email"
-        ></v-text-field>
+        ></VTextField>
 
-        <v-text-field
+        <VTextField
             v-model="registerData.password"
             required
             label="Password"
             type="password"
-        ></v-text-field>
+        ></VTextField>
 
-        <v-text-field
+        <VTextField
             v-model="registerData.password_confirmation"
             required
             label="Confirm Password"
             type="password"
-        ></v-text-field>
+        ></VTextField>
 
-        <v-btn
+        <VBtn
             class="me-4"
             type="submit"
         >
             Register !
-        </v-btn>
-        Already a user?<v-btn variant="plain"><RouterLink to="/login">Login</RouterLink></v-btn>
+        </VBtn>
+        Already a user?<VBtn variant="plain"><RouterLink to="/login">Login</RouterLink></VBtn>
         </form>
-    </v-col>
-    </v-row>
-    </v-sheet>
-</v-container>
+    </VCol>
+    </VRow>
+    </VSheet>
+</VContainer>
 </template>
 
 <style>

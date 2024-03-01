@@ -54,36 +54,40 @@ fetchProjects();
 </script>
 
 <template>
-    <v-card
+    <VContainer>
+        <ProjectForm value="Create" />
+        <VCard
         title="Projects"
         flat
+        class="mt-4"
         width="100%"
         color="primary"
-    >
-        <template v-slot:text>
-        <v-text-field
-            v-model="search"
-            label="Search"
-            prepend-inner-icon="mdi-magnify"
-            variant="outlined"
-            hide-details
-            single-line
-        ></v-text-field>
-        </template>
-    
-        <v-data-table
-        :headers="headers"
-        :items="projects"
-        :search="search"
         >
-        <template #item.actions="{ item }">
-            <project-show :project="item" />
-            <project-form :exprojectId="item.id" value="Edit" />
-            <v-btn @click="handleDelete(item.id)" color="error" class="mx-2">
-            <v-icon>mdi-delete</v-icon>
-            </v-btn>
-        </template>
-        </v-data-table>
-    </v-card>
+            <template v-slot:text>
+            <vTextField
+                v-model="search"
+                label="Search"
+                prepend-inner-icon="mdi-magnify"
+                variant="outlined"
+                hide-details
+                single-line
+            ></vTextField>
+            </template>
+        
+            <VDataTable
+            :headers="headers"
+            :items="projects"
+            :search="search"
+            >
+            <template #item.actions="{ item }">
+                <project-show :project="item" />
+                <project-form :exprojectId="item.id" value="Edit" />
+                <VBtn @click="handleDelete(item.id)" color="error" class="mx-2">
+                <VIcon>mdi-delete</VIcon>
+                </VBtn>
+            </template>
+            </VDataTable>
+        </VCard>
+    </VContainer>
     </template>
     

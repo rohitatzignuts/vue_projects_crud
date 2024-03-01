@@ -86,38 +86,38 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="text-center d-inline" >
-    <v-dialog v-model="dialog" max-width="600">
+  <div class="text-center d-inline " >
+    <VDialog v-model="dialog" max-width="600">
       <template #activator="{ props: activatorProps }">
         <v-btn :text="value" variant="outlined" v-bind="activatorProps"></v-btn>
       </template>
-      <v-card prepend-icon="mdi-pencil" :title="`${projectId ? 'Edit' : 'Create'} Project`">
-        <v-card-text>
-          <v-row dense>
-            <v-col cols="12">
-              <v-text-field
+      <VCard prepend-icon="mdi-pencil" :title="`${projectId ? 'Edit' : 'Create'} Project`">
+        <VCardText>
+          <VRow dense>
+            <VCol cols="12">
+              <VTextField
                 v-model="project.projectName"
                 label="Project Name*"
                 required
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12">
-              <v-text-field
+              ></VTextField>
+            </VCol>
+            <VCol cols="12">
+              <VTextField
                 v-model="project.projectDescription"
                 label="Project Description*"
                 required
-              ></v-text-field>
-            </v-col>
-          </v-row>
+              ></VTextField>
+            </VCol>
+          </VRow>
           <small class="text-caption text-medium-emphasis">*indicates required field</small>
-        </v-card-text>
+        </VCardText>
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn text="Close" variant="plain" @click="dialog = false"></v-btn>
           <v-btn color="primary" text="Save" variant="tonal" @click="saveProject"></v-btn>
         </v-card-actions>
-      </v-card>
-    </v-dialog>
+      </VCard>
+    </VDialog>
   </div>
 </template>

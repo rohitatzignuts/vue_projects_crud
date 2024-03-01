@@ -10,29 +10,29 @@ defineProps<{
 
 <template>
 <div class="text-center d-inline pr-2">
-    <v-btn @click="dialog = true" color="primary">
+    <VBtn @click="dialog = true" color="primary">
     View
-    </v-btn>
+    </VBtn>
 
-    <v-dialog
+    <VDialog
     v-model="dialog"
     width="auto"
     >
-    <v-card
+    <VCard
         max-width="400"
         prepend-icon="mdi-eye"
         :text="project.description"
         :title="project.name"
     >
         <template v-slot:actions>
-        <v-btn
+        <VBtn
             class="ms-auto"
             text="Close"
             @click="dialog = false"
-        ></v-btn>
+        ></VBtn>
         </template>
-    </v-card>
-    </v-dialog>
+    </VCard>
+    </VDialog>
 </div>
 </template>
 
