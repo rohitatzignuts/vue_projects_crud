@@ -61,7 +61,6 @@ const saveProject = () => {
         showConfirmButton: false,
         timer: 1500
       })
-
       project.value.projectName = ''
       project.value.projectDescription = ''
       dialog.value = false

@@ -11,7 +11,6 @@ const { registerData, handleLogin } = useLogin();
         <form @submit.prevent="handleLogin">
         <vTextField
         v-model="registerData.email"
-        :counter="7"
         label="E-main"
         type="email"
         ></vTextField>

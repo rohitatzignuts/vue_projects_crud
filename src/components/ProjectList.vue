@@ -16,36 +16,36 @@ const headers = [
 const {fetchProjects,projects} =useFetchProjects()
 
 const handleDelete = (id:number) => {
-Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-}).then((result) => {
-    if (result.isConfirmed) {
-    axios.delete(`/api/projects/${id}`)
-        .then(() => {
-        Swal.fire({
-            icon: 'success',
-            title: 'Project deleted successfully!',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        fetchProjects();
-        })
-        .catch(() => {
-        Swal.fire({
-            icon: 'error',
-            title: 'An Error Occurred!',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        });
-    }
-});
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+        axios.delete(`/api/projects/${id}`)
+            .then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Project deleted successfully!',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            fetchProjects();
+            })
+            .catch(() => {
+            Swal.fire({
+                icon: 'error',
+                title: 'An Error Occurred!',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            });
+        }
+    });
 };
 
 onMounted(() => {
