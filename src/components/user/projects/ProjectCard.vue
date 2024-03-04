@@ -1,5 +1,5 @@
 <template>
-<v-card class="v-theme--dark v-card--density-default v-card--variant-elevated pa-4">
+<VCard class="v-theme--dark v-card--density-default v-card--variant-elevated pa-4">
     <v-card-items>
         <div class="d-flex align-center justify-space-between pa-4">
             <div class="d-flex">
@@ -18,20 +18,20 @@
     <div>
 
         <v-card-text>
-            <v-row>
-                <v-col cols="12" md="6" lg="4">
+            <VRow>
+                <VCol cols="12" md="6" lg="4">
                     <v-card class="pa-2 rounded">
                         <h3 class="text-base">$980 <span class="text-body-1">/ $420</span></h3>
                         <span>Total Budget</span>
                     </v-card>
-                </v-col>
-                <v-col cols="12" md="6" lg="8">
+                </VCol>
+                <VCol cols="12" md="6" lg="8">
                     <div>
                         <h6 class="text-base font-weight-medium">Start Date: <span class="text-body-1">24/7/21</span></h6>
                         <h6 class="text-base font-weight-medium mb-1">Deadline: <span class="text-body-1">8/10/21</span></h6>
                     </div>
-                </v-col>
-            </v-row>
+                </VCol>
+            </VRow>
             <p class="mt-4 mb-0 clamp-text">App design combines the user interface (UI) and user experience (UX).</p>
         </v-card-text>
     </div>
@@ -39,7 +39,7 @@
         We don't make assumptions about the rest of your technology stack, so you can develop new features in React.
     </v-card-text>
 
-    <v-card>
+    <VCard>
         <v-card-text>
             <div class="d-flex align-center justify-space-between flex-wrap gap-2">
                 <h4 class="text-base font-weight-medium">All Hours: <span class="text-body-1">880/421</span></h4>
@@ -76,6 +76,6 @@
                 </span>
             </div>
         </v-card-text>
-    </v-card>
-</v-card>
+    </VCard>
+</VCard>
 </template>

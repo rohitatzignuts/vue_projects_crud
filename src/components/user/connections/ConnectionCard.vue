@@ -1,5 +1,5 @@
 <template>
-<v-card class="v-theme--dark v-card--density-default v-card--variant-elevated pa-4">
+<VCard class="v-theme--dark v-card--density-default v-card--variant-elevated pa-4">
     <VCardItem>
         <VIcon>mdi-dots-vertical</VIcon>
         <div class="d-flex flex-column align-center">
@@ -40,5 +40,5 @@
             <VBtn variant="tonal" class="ms-2"><VIcon>mdi-email-outline</VIcon></VBtn>
         </VCardText>
     </VCardItem>
-</v-card>
+</VCard>
 </template>
