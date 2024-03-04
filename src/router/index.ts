@@ -3,6 +3,7 @@ import RegisterUserVue from '@/components/RegisterUser.vue'
 import LoginUserVue from '@/components/LoginUser.vue'
 import HomeViewVue from '@/views/HomeView.vue'
 import ErrorViewVue from '@/views/ErrorView.vue'
+import UserProfileVue from '@/views/UserProfile.vue'
 
 const routes = [
   { 
@@ -17,6 +18,10 @@ const routes = [
   { 
     path: '/register', 
     component: RegisterUserVue
+  },
+  { 
+    path: '/user-profile', 
+    component: UserProfileVue
   },
   { 
     path: '/:pathMatch(.*)*' ,

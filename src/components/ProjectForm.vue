@@ -7,6 +7,7 @@ import type Project from '@/project'
 const loading = ref(false)
 const dialog = ref(false)
 const projectId = ref<number>()
+
 const project = ref<Project>({
   projectName: '',
   projectDescription: ''
