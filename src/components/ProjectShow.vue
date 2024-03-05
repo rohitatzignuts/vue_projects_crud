@@ -2,21 +2,19 @@
 import type Project from '@/project';
 import {ref} from 'vue'
 
-const dialog = ref(false)
+const emit = defineEmits(['handleCloseDialog'])
 defineProps<{
     project : Project
+    isVisible : boolean
 }>()
 </script>
 
 <template>
-<div class="text-center d-inline pr-2">
-    <VBtn @click="dialog = true" color="primary">
-    View
-    </VBtn>
-
+<div class="text-center d-inline pr-2 ">
     <VDialog
-    v-model="dialog"
+    :model-value="isVisible"
     width="auto"
+    persistent
     >
     <VCard
         max-width="400"
@@ -28,7 +26,7 @@ defineProps<{
         <VBtn
             class="ms-auto"
             text="Close"
-            @click="dialog = false"
+            @click="emit('handleCloseDialog',false)"
         ></VBtn>
         </template>
     </VCard>

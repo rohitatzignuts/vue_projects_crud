@@ -4,16 +4,38 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import ProjectForm from './ProjectForm.vue';
 import ProjectShow from './ProjectShow.vue';
-import {useFetchProjects} from '@/composables/useFetchProjects'
+import type Project from '@/project';
 
+const editingProjectId = ref<number>()
+const projectData = ref<Project>()
 const search = ref('');
 const headers = [
-{ text: 'Name', value: 'name', width: '20%' },
-{ text: 'Description', value: 'description', width: '60%' },
-{ text: 'Actions', value: 'actions', sortable: false, width: '20%' },
+    { title: 'Name', value: 'name', width: '20%' },
+    { title: 'Description', value: 'description', width: '60%' },
+    { title: 'Actions', value: 'actions', sortable: false, width: '20%' },
 ];
+const showDialog = ref<Boolean>(false)
+const editDialog = ref<Boolean>(false)
+const projects = ref<Array<Project>>([]);
+const fetchProjects = () => {
+    axios.get<Project[]>('/api/projects')
+        .then(res => {
+            projects.value = res.data;
+        })
+        .catch(error => {
+            console.error('Error fetching projects:', error);
+        });
+};
 
-const {fetchProjects,projects} =useFetchProjects()
+const viewProjectDetails = (item : Project) => {
+    showDialog.value = true
+    projectData.value = item
+}
+
+const editProjectDetails = ( id : number ) => {
+    editDialog.value = true
+    editingProjectId.value = id
+}
 
 const handleDelete = (id:number) => {
     Swal.fire({
@@ -26,68 +48,57 @@ const handleDelete = (id:number) => {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-        axios.delete(`/api/projects/${id}`)
-            .then(() => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Project deleted successfully!',
-                showConfirmButton: false,
-                timer: 1000
-            });
-            fetchProjects();
-            })
-            .catch(() => {
-            Swal.fire({
-                icon: 'error',
-                title: 'An Error Occurred!',
-                showConfirmButton: false,
-                timer: 1000
-            });
-            });
+            axios.delete(`/api/projects/${id}`)
+                .then(() => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Project deleted successfully!',
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                    fetchProjects();
+                })
+                .catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'An Error Occurred!',
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                });
         }
     });
 };
 
 onMounted(() => {
-fetchProjects();
+    fetchProjects();
 });
 </script>
 
 <template>
-    <VContainer>
-        <ProjectForm value="Create" />
-        <VCard
-        title="Projects"
-        flat
-        class="mt-4"
-        width="100%"
-        color="primary"
-        >
-            <template v-slot:text>
-            <vTextField
-                v-model="search"
-                label="Search"
-                prepend-inner-icon="mdi-magnify"
-                variant="outlined"
-                hide-details
-                single-line
-            ></vTextField>
-            </template>
-        
-            <VDataTable
-            :headers="headers"
-            :items="projects"
-            :search="search"
-            >
+<VContainer>
+    <ProjectForm value="Create" @handleList="fetchProjects" />
+    <VCard title="Projects" flat class="mt-4" width="100%" color="primary">
+        <template v-slot:text>
+            <vTextField v-model="search" label="Search" prepend-inner-icon="mdi-magnify" variant="outlined" hide-details single-line></vTextField>
+        </template>
+
+        <VDataTable :headers="headers" :items="projects" :search="search">
             <template #item.actions="{ item }">
-                <project-show :project="item" />
-                <project-form :exprojectId="item.id" value="Edit" />
-                <VBtn @click="handleDelete(item.id)" color="error" class="mx-2">
-                <VIcon>mdi-delete</VIcon>
+                
+                <VBtn @click="viewProjectDetails(item)" color="primary" class="mx-2 my-2">
+                    <VIcon>mdi-eye</VIcon>
+                </VBtn>
+                <VBtn @click="editProjectDetails(item.id)" variant="tonal" class="mx-2 my-2">
+                    <VIcon>mdi-pencil</VIcon>
+                </VBtn>
+                <VBtn @click="handleDelete(item.id)" color="error" class="mx-2 my-2">
+                    <VIcon>mdi-delete</VIcon>
                 </VBtn>
             </template>
-            </VDataTable>
-        </VCard>
-    </VContainer>
-    </template>
-    
+        </VDataTable>
+    </VCard>
+</VContainer>
+<project-show :project="projectData" :is-visible="showDialog" @handleCloseDialog="showDialog=false"/>
+<project-form @handleList="fetchProjects" :viewDialog="editDialog" :editing-project-id="editingProjectId"/> 
+</template>

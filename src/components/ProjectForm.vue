@@ -1,23 +1,25 @@
 <script setup lang="ts">
-import { ref, onMounted, defineProps } from 'vue'
+import { ref, onMounted, defineProps, watchEffect } from 'vue'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import type Project from '@/project'
 
 const loading = ref(false)
-const dialog = ref(false)
 const projectId = ref<number>()
-
 const project = ref<Project>({
   projectName: '',
   projectDescription: ''
 })
 
-const { value, exprojectId } = defineProps<{ value: string; exprojectId?: number }>()
+const emits = defineEmits(['handleList','handleDialog'])
+const { editingProjectId,viewDialog } = defineProps<{ editingProjectId?: number,viewDialog:boolean  }>()
+
+const handleCloseDialog = () => {
+}
 
 const getProject = () => {
-  if (exprojectId) {
-    projectId.value = exprojectId
+  if (editingProjectId) {
+    projectId.value = editingProjectId
     axios
       .get(`/api/projects/${projectId.value}`)
       .then((response) => {
@@ -56,6 +58,7 @@ const saveProject = () => {
     description: project.value.projectDescription
   })
     .then(() => {
+      emits('handleList', true)
       Swal.fire({
         icon: 'success',
         title: 'Project saved successfully!',
@@ -64,7 +67,6 @@ const saveProject = () => {
       })
       project.value.projectName = ''
       project.value.projectDescription = ''
-      dialog.value = false
     })
     .catch((error) => {
       Swal.fire({
@@ -79,18 +81,17 @@ const saveProject = () => {
       loading.value = false
     })
 }
-
-onMounted(() => {
-  getProject()
+watchEffect(() => {
+  if(editingProjectId){
+    getProject()
+  }
 })
+
 </script>
 
 <template>
   <div class="text-center d-inline " >
-    <VDialog v-model="dialog" max-width="600">
-      <template #activator="{ props: activatorProps }">
-        <v-btn :text="value" variant="outlined" v-bind="activatorProps"></v-btn>
-      </template>
+    <VDialog :model-value="viewDialog" max-width="600">
       <VCard prepend-icon="mdi-pencil" :title="`${projectId ? 'Edit' : 'Create'} Project`">
         <VCardText>
           <VRow dense>
@@ -114,7 +115,7 @@ onMounted(() => {
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text="Close" variant="plain" @click="dialog = false"></v-btn>
+          <v-btn text="Close" variant="plain" @click="handleCloseDialog"></v-btn>
           <v-btn color="primary" text="Save" variant="tonal" @click="saveProject"></v-btn>
         </v-card-actions>
       </VCard>

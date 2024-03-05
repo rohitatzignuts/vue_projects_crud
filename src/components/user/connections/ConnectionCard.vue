@@ -1,7 +1,9 @@
 <template>
 <VCard class="v-theme--dark v-card--density-default v-card--variant-elevated pa-4">
     <VCardItem>
-        <VIcon>mdi-dots-vertical</VIcon>
+        <VBtn icon variant="text">
+            <VIcon>mdi-dots-vertical</VIcon>
+        </VBtn>
         <div class="d-flex flex-column align-center">
             <VAvatar size="x-large" class="my-2" image="https://demos.pixinvent.com/vuexy-vuejs-admin-template/demo-1/assets/avatar-5-d340221a.png" />
             <VCardText class="text-h6 ">Eugenia Parsons</VCardText>
@@ -36,8 +38,10 @@
     </VCardItem>
     <VCardItem class="text-center">
         <VCardText>
-            <VBtn variant="tonal" prepend-icon="mdi-account-check-outline">Connect</VBtn>
-            <VBtn variant="tonal" class="ms-2"><VIcon>mdi-email-outline</VIcon></VBtn>
+            <VBtn variant="tonal" class="my-2" prepend-icon="mdi-account-check-outline">Connect</VBtn>
+            <VBtn variant="tonal" class="ms-2 my-2">
+                <VIcon>mdi-email-outline</VIcon>
+            </VBtn>
         </VCardText>
     </VCardItem>
 </VCard>

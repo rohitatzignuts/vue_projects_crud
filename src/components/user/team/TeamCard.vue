@@ -10,8 +10,8 @@
                 </v-card-title>
             </div>
             <v-card-subtitle class="pa-0">
-                <VIcon>mdi-star-outline</VIcon>
-                <VIcon>mdi-dots-vertical</VIcon>
+                <VBtn icon variant="text"><VIcon>mdi-star-outline</VIcon></VBtn>
+                <VBtn icon variant="text"><VIcon>mdi-dots-vertical</VIcon></VBtn>
             </v-card-subtitle>
         </div>
     </v-card-items>
@@ -40,7 +40,7 @@
                 </VAvatar>
             </div>
             <div class="demo-space-x">
-                <VChip label color="success" class="mx-2">
+                <VChip label color="success" class="mx-2 my-2">
                     Vue
                 </VChip>
 

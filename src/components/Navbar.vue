@@ -53,17 +53,18 @@ watch(locale, (newlocale) => {
 </script>
 
 <template>
-  <vRow justify="space-between" align="center" class="pa-14 ma-2">
-    <vCol>
+  <VRow align="center" class="pa-14 ma-2 justify-space-between">
+    <VCol cols="6"  sm="2">
       <div>
         <router-link to="/"><h1>{{t("Project Master")}}</h1></router-link>
       </div>
-    </vCol>
-    <vCol>
-      <div id="links">
+    </VCol>
+    <VCol cols="6"  sm="10">
+      <div id="links" class="d-flex ga-2 align-center justify-end">
         <router-link to="/"><v-btn variant="outlined">{{t("Home")}}</v-btn></router-link>
-        
+        <router-link to="/user-profile"><v-btn variant="outlined">{{t("Profile")}}</v-btn></router-link>
         <v-btn variant="outlined" @click="handleLogout">{{t("Logout")}}</v-btn>
+        <VIcon class="mx-2">mdi-translate</VIcon>
         <div>
           <select v-model="locale">
             <option>en-US</option>
@@ -71,18 +72,14 @@ watch(locale, (newlocale) => {
           </select>
           </div>
       </div>
-    </vCol>
-  </vRow>
+    </VCol>
+  </VRow>
 </template>
 
 <style scoped>
 a {
   text-decoration: none;
   color: white;
-}
-#links {
-  display: flex;
-  gap: 0.5rem;
 }
 select{
   color: white;
