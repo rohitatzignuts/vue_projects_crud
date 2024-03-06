@@ -56,7 +56,7 @@ watch(locale, (newlocale) => {
   <VRow align="center" class="pa-14 ma-2 justify-space-between">
     <VCol cols="6"  sm="2">
       <div>
-        <router-link to="/"><h1>{{t("Project Master")}}</h1></router-link>
+        <router-link to="/"><h3>{{t("Project Master")}}</h3></router-link>
       </div>
     </VCol>
     <VCol cols="6"  sm="10">

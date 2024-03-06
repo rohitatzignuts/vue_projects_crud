@@ -13,7 +13,7 @@ defineProps<{
 <div class="text-center d-inline pr-2 ">
     <VDialog
     :model-value="isVisible"
-    width="auto"
+    width="25%"
     persistent
     >
     <VCard

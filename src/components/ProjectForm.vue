@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, defineProps, watchEffect } from 'vue'
+import { ref, defineProps, watchEffect, watch } from 'vue'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import type Project from '@/project'
@@ -12,14 +12,19 @@ const project = ref<Project>({
 })
 
 const emits = defineEmits(['handleList','handleDialog'])
-const { editingProjectId,viewDialog } = defineProps<{ editingProjectId?: number,viewDialog:boolean  }>()
+const props = defineProps<{ editingProjectId?: number, viewDialog: boolean  }>()
 
 const handleCloseDialog = () => {
+    emits('handleDialog',false)
 }
 
 const getProject = () => {
-  if (editingProjectId) {
-    projectId.value = editingProjectId
+  project.value = {
+    projectName: '',
+    projectDescription: ''
+  };
+  if (props.editingProjectId) {
+    projectId.value = props.editingProjectId
     axios
       .get(`/api/projects/${projectId.value}`)
       .then((response) => {
@@ -59,6 +64,7 @@ const saveProject = () => {
   })
     .then(() => {
       emits('handleList', true)
+      emits('handleDialog',false)
       Swal.fire({
         icon: 'success',
         title: 'Project saved successfully!',
@@ -81,9 +87,20 @@ const saveProject = () => {
       loading.value = false
     })
 }
+
 watchEffect(() => {
-  if(editingProjectId){
+  if(props.editingProjectId){
     getProject()
+  }
+})
+
+watch(() => props.viewDialog, (value) => {
+  if (!value) {
+    project.value = {
+      projectName: '',
+      projectDescription: ''
+    }
+    projectId.value = undefined
   }
 })
 

@@ -16,6 +16,7 @@ const headers = [
 ];
 const showDialog = ref<Boolean>(false)
 const editDialog = ref<Boolean>(false)
+const createDialog = ref<Boolean>(false)
 const projects = ref<Array<Project>>([]);
 const fetchProjects = () => {
     axios.get<Project[]>('/api/projects')
@@ -35,6 +36,10 @@ const viewProjectDetails = (item : Project) => {
 const editProjectDetails = ( id : number ) => {
     editDialog.value = true
     editingProjectId.value = id
+}
+
+const handleCreate = () => {
+    createDialog.value = true
 }
 
 const handleDelete = (id:number) => {
@@ -73,11 +78,14 @@ const handleDelete = (id:number) => {
 onMounted(() => {
     fetchProjects();
 });
+
 </script>
 
 <template>
 <VContainer>
-    <ProjectForm value="Create" @handleList="fetchProjects" />
+    <div class="d-flex justify-space-between">
+    <VBtn @click="handleCreate" color="info" variant="outlined" class=" my-2">Create</VBtn>
+    </div>
     <VCard title="Projects" flat class="mt-4" width="100%" color="primary">
         <template v-slot:text>
             <vTextField v-model="search" label="Search" prepend-inner-icon="mdi-magnify" variant="outlined" hide-details single-line></vTextField>
@@ -100,5 +108,6 @@ onMounted(() => {
     </VCard>
 </VContainer>
 <project-show :project="projectData" :is-visible="showDialog" @handleCloseDialog="showDialog=false"/>
-<project-form @handleList="fetchProjects" :viewDialog="editDialog" :editing-project-id="editingProjectId"/> 
+<project-form @handleList="fetchProjects" :viewDialog="editDialog" :editing-project-id="editingProjectId" @handleDialog="editDialog=false"/> 
+<project-form :viewDialog="createDialog" @handleDialog="createDialog=false" @handleList="fetchProjects" />
 </template>
