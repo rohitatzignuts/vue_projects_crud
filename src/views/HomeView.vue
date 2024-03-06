@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import ProjectListVue from '@/components/ProjectList.vue';
-import Default from '@/layouts/Default.vue';
+import DefaultLayout from '@/layouts/Default.vue';
 </script>
 
 <template>
-    <Default>
+    <DefaultLayout>
         <template #content>
             <ProjectListVue />
         </template>
-    </Default>
+    </DefaultLayout>
 </template>

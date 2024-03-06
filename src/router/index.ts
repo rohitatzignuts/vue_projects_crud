@@ -4,6 +4,8 @@ import LoginUserVue from '@/components/LoginUser.vue'
 import HomeViewVue from '@/views/HomeView.vue'
 import ErrorViewVue from '@/views/ErrorView.vue'
 import UserProfileVue from '@/views/UserProfile.vue'
+import MainCategory from '@/views/market-place/MainCategory.vue'
+import SubCategory from '@/views/market-place/SubCategory.vue'
 
 const routes = [
   { 
@@ -22,6 +24,14 @@ const routes = [
   { 
     path: '/user-profile', 
     component: UserProfileVue
+  },
+  { 
+    path: '/market-place', 
+    component: MainCategory
+  },
+  { 
+    path: '/market-place/category/:id', 
+    component: SubCategory
   },
   { 
     path: '/:pathMatch(.*)*' ,

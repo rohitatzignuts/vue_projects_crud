@@ -85,6 +85,11 @@ onMounted(() => {
 <VContainer>
     <div class="d-flex justify-space-between">
     <VBtn @click="handleCreate" color="info" variant="outlined" class=" my-2">Create</VBtn>
+    <router-link to="market-place">
+        <VBtn color="info" variant="outlined" class=" my-2">
+            <VIcon class="me-2">mdi-cart-outline</VIcon>Market Place
+        </VBtn>
+    </router-link>
     </div>
     <VCard title="Projects" flat class="mt-4" width="100%" color="primary">
         <template v-slot:text>
