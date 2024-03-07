@@ -61,7 +61,7 @@ watch(locale, (newlocale) => {
     </VCol>
     <VCol cols="6"  sm="10">
       <div id="links" class="d-flex ga-2 align-center justify-end">
-        <router-link to="/"><v-btn variant="outlined">{{t("Home")}}</v-btn></router-link>
+        <router-link to="/"><v-btn variant="outlined" color="info">{{t("Home")}}</v-btn></router-link>
         <router-link to="/user-profile"><v-btn variant="outlined">{{t("Profile")}}</v-btn></router-link>
         <v-btn variant="outlined" @click="handleLogout">{{t("Logout")}}</v-btn>
         <VIcon class="mx-2">mdi-translate</VIcon>

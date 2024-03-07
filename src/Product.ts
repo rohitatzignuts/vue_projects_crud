@@ -7,6 +7,8 @@ export interface SubCategory {
     description: string;
     price: number;
     imageUrl: string;
+    quantity?: number; 
+    date? : string;
 }
 
 export interface MainCategory {
@@ -54,18 +56,18 @@ export const products = ref<MainCategory[]>([
             {
                 id: "21",
                 parentCategory: "2",
-                title: "Smartphone",
+                title: "Iphone 8",
                 description: 'High-performance smartphone with advanced features',
-                price: 500,
-                imageUrl: "https://demos.pixinvent.com/vuexy-vuejs-admin-template/demo-1/assets/2-900bffb1.png",
+                price: 700,
+                imageUrl: "https://images.macrumors.com/t/1UMFGIID_f7iTTnlxMhDxS6UxYE=/800x0/smart/article-new/2017/09/iphone_8_roundup_header.jpg?lossy",
             },
             {
                 id: "22",
                 parentCategory: "2",
-                title: "Laptop",
+                title: "OnePlusNord 5G",
                 description: 'Powerful and portable laptop for work and entertainment',
-                price: 1000,
-                imageUrl: "https://demos.pixinvent.com/vuexy-vuejs-admin-template/demo-1/assets/2-900bffb1.png",
+                price: 500,
+                imageUrl: "https://image01-in.oneplus.net/ebp/202306/25/1-m00-51-88-cpgm7wsykruahbobaardu7ablie779.png",
             },
         ],
     },
