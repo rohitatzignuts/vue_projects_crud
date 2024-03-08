@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const isDialogVisible = ref<boolean>(false)
+const isDialogVisible = ref<boolean>(true)
 const selectedDate = ref<string>('')
 const today = new Date();
 const day = String(today.getDate()).padStart(2, '0');
