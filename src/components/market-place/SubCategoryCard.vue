@@ -18,10 +18,10 @@ const handleAddToCart = (product: SubCategory) => {
 <template>
     <VCard class="mx-auto" w100>
         <VRow>
-            <VCol cols="4">
-                <VImg height="200px" :src="subProduct.imageUrl" contain></VImg>
+            <VCol lg="4" sm="12" cols="12" md="4">
+                <VImg height="200px" :src="subProduct.imageUrl" cover></VImg>
             </VCol>
-            <VCol cols="8">
+            <VCol lg="8" sm="12" xs="12" md="8">
                 <v-card-title>
                     {{ subProduct.title }}
                 </v-card-title>
