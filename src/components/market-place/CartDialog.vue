@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 import type { SubCategory } from '@/Product';
 import { computed, ref } from 'vue'
 import CartAddress from './CartAddress.vue'
@@ -29,7 +28,6 @@ const props = defineProps<{
 const removeItem = (id: string) => {
     emits('handleRemovedItems', id)
 }
-
 </script>
 
 <template>

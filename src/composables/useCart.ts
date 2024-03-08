@@ -1,4 +1,4 @@
-import { computed, ref, watch, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { products, type SubCategory } from '../Product'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
@@ -18,7 +18,7 @@ export default function useCart() {
     const handleCartProduct = (cartProduct: SubCategory) => {
         const existingItem = itemsInCart.value.find(
             (item) => item.id === cartProduct.id && item.date === storedDate.value
-        )
+        ) 
         if (existingItem) {
             existingItem.quantity++
         } else {
