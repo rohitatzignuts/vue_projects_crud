@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type Project from '@/project';
-import {ref} from 'vue'
 
 const emit = defineEmits(['handleCloseDialog'])
 defineProps<{

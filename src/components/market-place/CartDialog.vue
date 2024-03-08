@@ -2,7 +2,11 @@
 
 import type { SubCategory } from '@/Product';
 import { computed, ref } from 'vue'
+import CartAddress from './CartAddress.vue'
 
+const orderDate = computed(() => {
+    return JSON.parse(localStorage.getItem('selectedDate') || '')
+})
 
 const cartTotal = computed(() => {
     if (props.cartItems && props.cartItems.length) {
@@ -16,49 +20,46 @@ const cartTotal = computed(() => {
     return 0;
 });
 
-
-const emits = defineEmits(['handleCloseDialog','handleRemovedItems'])
+const emits = defineEmits(['handleCloseDialog', 'handleRemovedItems'])
 const tab = ref(null)
 const props = defineProps<{
-    isVisible ?: boolean
-    cartItems : Array<SubCategory>
+    isVisible?: boolean
+    cartItems: Array<SubCategory>
 }>()
-
 const removeItem = (id: string) => {
-    emits('handleRemovedItems',id)
+    emits('handleRemovedItems', id)
 }
 
 </script>
+
 <template>
 <div class="text-center pa-4">
-    <v-dialog :model-value="props.isVisible" transition="dialog-bottom-transition" fullscreen>
-        <v-card>
-            <v-toolbar>
-                <v-btn icon="mdi-close" @click="emits('handleCloseDialog',false)"></v-btn>
-
-                <v-toolbar-title>Cart</v-toolbar-title>
-
+    <VDialog :model-value="props.isVisible" transition="dialog-bottom-transition" fullscreen>
+        <VCard>
+            <VToolbar>
+                <VBtn icon="mdi-close" @click="emits('handleCloseDialog',false)"></VBtn>
+                <VToolbar-title >
+                    Cart
+                </VToolbar-title>
                 <v-spacer></v-spacer>
-
-            </v-toolbar>
-
-            <v-card>
-                <v-tabs v-model="tab" align-tabs="center" color="info" bg-color="#FFFFFF00" stacked>
-                    <v-tab value="cart">
-                        <v-icon class="my-2">mdi-cart</v-icon>
+            </VToolbar>
+            <VCard>
+                <VTabs v-model="tab" align-tabs="center" color="info" bg-color="#FFFFFF00" stacked>
+                    <VTab value="cart">
+                        <VIcon class="my-2">mdi-cart</VIcon>
                         Cart
-                    </v-tab>
+                    </VTab>
 
-                    <v-tab value="address">
-                        <v-icon class="my-2">mdi-office-building-marker</v-icon>
+                    <VTab value="address">
+                        <VIcon class="my-2">mdi-office-building-marker</VIcon>
                         Address
-                    </v-tab>
+                    </VTab>
 
-                    <v-tab value="payment">
-                        <v-icon class="my-2">mdi-account-credit-card</v-icon>
+                    <VTab value="payment">
+                        <VIcon class="my-2">mdi-account-credit-card</VIcon>
                         Payment
-                    </v-tab>
-                </v-tabs>
+                    </VTab>
+                </VTabs>
 
                 <v-window v-model="tab">
                     <v-window-item value="cart">
@@ -66,12 +67,15 @@ const removeItem = (id: string) => {
                             <!-- cart  -->
                             <VCol cols="7">
                                 <VCard class="ma-4">
-                                    <v-list>
-                                        <v-list-subheader class="mb-4">My Shopping Bag ({{ props.cartItems ? props.cartItems.length : 0 }} Items)</v-list-subheader>
+                                    <VList>
+                                        <v-list-subheader class="mb-4">
+                                            My Shopping Bag ({{ props.cartItems ? props.cartItems.length : 0 }} Items)
+                                        </v-list-subheader>
                                         <v-list-item v-for="(item, i) in props.cartItems" :key="i" :value="item" color="primary" rounded="shaped">
                                             <VRow>
                                                 <VCol cols="2">
-                                                    <v-img :src="item.imageUrl" contain min-height="100%"/>
+                                                    
+                                                    <v-img :src="item.imageUrl" contain min-height="100%" />
                                                 </VCol>
                                                 <VCol cols="10">
                                                     <div class="d-flex justify-space-between">
@@ -87,67 +91,69 @@ const removeItem = (id: string) => {
                                                 </VCol>
                                             </VRow>
                                         </v-list-item>
-                                    </v-list>
+                                    </VList>
                                 </VCard>
                             </VCol>
                             <!-- place order  -->
                             <VCol cols="5">
-                                <v-card class="me-4 my-4" outlined>
-                                    <v-card-text>
+                                <VCard class="me-4 my-4" outlined>
+                                    <VCardText>
                                         <h3 class="text-base font-weight-medium mb-3 ms-2">Offer</h3>
                                         <div class="d-flex align-center justify-space-between">
-                                            <input type="text" placeholder="Enter Promo Code" class="pa-2" width="100%"/>
-                                            <v-btn color="info" >Apply</v-btn>
+                                            <input type="text" placeholder="Enter Promo Code" class="pa-2" width="100%" />
+                                            <VBtn color="info">Apply</VBtn>
                                         </div>
-                                        <v-divider class="my-4"></v-divider>
-                                        </v-card-text>
-                                        <v-divider></v-divider>
-                                        <v-card-text>
+                                        <VDivider class="my-4"></VDivider>
+                                    </VCardText>
+                                    <VDivider></VDivider>
+                                    <VCardText>
                                         <h3 class="text-base font-weight-medium mb-3">Price Details</h3>
                                         <div class="text-high-emphasis" v-if="props.cartItems && props.cartItems.length">
                                             <div class="d-flex justify-space-between mb-2">
-                                            <span>Bag Total</span>
-                                            <span>{{ cartTotal }}</span>
+                                                <span>Bag Total</span>
+                                                <span>{{ cartTotal }}</span>
                                             </div>
                                             <div class="d-flex justify-space-between mb-2">
-                                            <span>Order Total</span>
-                                            <span>{{ cartTotal }}</span>
+                                                <span>Order Date</span>
+                                                <span>{{ orderDate }}</span>
                                             </div>
                                             <div class="d-flex justify-space-between">
-                                            <span>Delivery Charges</span>
-                                            <div>
-                                                <span class="text-decoration-line-through text-disabled me-2">$5.00</span>
-                                                <v-chip class="text-success" small>Free</v-chip>
-                                            </div>
+                                                <span>Delivery Charges</span>
+                                                <div>
+                                                    <span class="text-decoration-line-through text-disabled me-2">$5.00</span>
+                                                    <VChip class="text-success" small>Free</VChip>
+                                                </div>
                                             </div>
                                         </div>
                                         <div v-else class="text-center my-6">
                                             <strong>Your Cart Is Empty !!</strong>
                                         </div>
-                                        </v-card-text>
-                                        <v-divider></v-divider>
-                                        <v-card-text class="d-flex justify-space-between py-4">
+                                    </VCardText>
+                                    <VDivider></VDivider>
+                                    <VCardText class="d-flex justify-space-between py-4">
                                         <h3 class="text-base font-weight-medium">Total</h3>
                                         <h3 class="text-base font-weight-medium">$ {{ cartTotal }}</h3>
-                                        </v-card-text>
-                                    </v-card>
+                                    </VCardText>
+                                </VCard>
                             </VCol>
                         </VRow>
 
                     </v-window-item>
                     <v-window-item value="address">
-                        <v-card>
-                            <v-card-text>Address</v-card-text>
-                        </v-card>
+                        <VCard>
+                            <VCardText>
+                                <CartAddress />
+                            </VCardText>
+                        </VCard>
                     </v-window-item>
                     <v-window-item value="payment">
-                        <v-card>
-                            <v-card-text>Payment</v-card-text>
-                        </v-card>
+                        <VCard>
+                            <VCardText>Payment</VCardText>
+                        </VCard>
                     </v-window-item>
                 </v-window>
-            </v-card>
-        </v-card>
-    </v-dialog>
+            </VCard>
+        </VCard>
+    </VDialog>
 </div>
 </template>

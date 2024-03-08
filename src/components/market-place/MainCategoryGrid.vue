@@ -1,27 +1,34 @@
 <script setup lang="ts">
 import MainCategoryCard from './MainCategoryCard.vue'
-import { products } from '../../Product.ts';
+import CartDialog from './CartDialog.vue'
+import { products } from '../../Product';
+import useCart from '@/composables/useCart';
 
-const mainProducts = products
+const { handleCart,filteredItemsInCart,handleRemovedItems,showCartDialog } = useCart()
 </script>
 
 <template>
-<v-layout class="rounded rounded-md my-10">
+<VLayout class="rounded rounded-md my-10">
     <v-app-bar title="Market Place" class="px-11">
         <RouterLink to="/">
             <VBtn variant="outlined" class="me-3" color="info">Home</VBtn>
         </RouterLink>
+        <VBtn variant="outlined" class="me-6" @click="handleCart">
+            <span>Cart</span>
+            <VIcon class="ms-2">mdi-cart</VIcon>
+        </VBtn>
     </v-app-bar>
-    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+    <VMain class="d-flex align-center justify-center" style="min-height: 300px;">
         <v-container class="bg-surface-variant">
-        <v-row no-gutters>
-        <v-col v-for="mainCategory in mainProducts" :key="mainCategory.id">
-            <v-sheet class="pa-2 ma-2">
+        <VRow no-gutters>
+        <VCol v-for="mainCategory in products" :key="mainCategory.id">
+            <VSheet class="pa-2 ma-2">
                 <MainCategoryCard :category="mainCategory"/>
-            </v-sheet>
-        </v-col>
-        </v-row>
+            </VSheet>
+        </VCol>
+        </VRow>
     </v-container>
-    </v-main>
-</v-layout>
+    </VMain>
+</VLayout>
+<CartDialog :isVisible="showCartDialog" @handleCloseDialog="showCartDialog = false" :cart-items="filteredItemsInCart" @handleRemovedItems="handleRemovedItems" />
 </template>

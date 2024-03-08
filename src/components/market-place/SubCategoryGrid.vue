@@ -1,60 +1,24 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
 import CartDialog from './CartDialog.vue'
 import SubCategoryCard from './SubCategoryCard.vue'
-import { products, type SubCategory } from '../../Product.ts';
-import { useRouter } from 'vue-router';
+import useCart from '@/composables/useCart';
 
-const showCartDialog = ref(false)
-const router = useRouter()
-const categoryId = ref(router.currentRoute.value.params.id)
-const itemsInCart = ref<SubCategory[]>(JSON.parse(localStorage.getItem('cartItems') || '[]'));
-const storedDate = ref<string>(JSON.parse(localStorage.getItem('selectedDate') || ''));
-console.log(storedDate.value)
-
-const handleCart = () => {
-    showCartDialog.value = true 
-}
-
-//add items to the cart
-const handleCartProduct = (cartProduct: SubCategory) => {
-    const existingItemIndex = itemsInCart.value.findIndex(item => item.id === cartProduct.id);
-    if (existingItemIndex === -1) {
-        itemsInCart.value.push({ ...cartProduct, quantity: 1, date: storedDate.value });
-    } else {
-        itemsInCart.value[existingItemIndex].quantity++;
-    }
-    localStorage.setItem('cartItems', JSON.stringify(itemsInCart.value));
-}
-
-
-const filteredItemsInCart = computed(() => {
-    return itemsInCart.value.filter(item => {
-        return item.date == storedDate.value;
-    });
-});
-
-
-//filter removed items
-const handleRemovedItems = (id : string) => {
-    itemsInCart.value = itemsInCart.value.filter(item => item.id !== id);
-    localStorage.setItem('cartItems', JSON.stringify(itemsInCart.value))
-}
-
-const filteredProducts = ref(products.value.filter(product => product.id === categoryId.value))
-
+const { handleCart,handleCartProduct,filteredItemsInCart,handleRemovedItems,filteredProducts,showCartDialog } = useCart()
 </script>
 
 <template>
-<v-layout class="rounded rounded-md my-10">
+<VLayout class="rounded rounded-md my-10">
     <v-app-bar title="Market Place">
+        <RouterLink to="/">
+            <VBtn variant="outlined" class="me-3" color="info">Home</VBtn>
+        </RouterLink>
         <VBtn variant="outlined" class="me-6" @click="handleCart">
             <span>Cart</span>
             <VIcon class="ms-2">mdi-cart</VIcon>
         </VBtn>
     </v-app-bar>
     <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
-        <v-container class="bg-surface-variant">
+        <VContainer class="bg-surface-variant">
         <VRow>
             <VCol cols="12" class="ms-2">
                 <RouterLink to="/market-place">
@@ -62,19 +26,19 @@ const filteredProducts = ref(products.value.filter(product => product.id === cat
                 </RouterLink>
             </VCol>
             <VCol>
-                    <v-row no-gutters>
-                        <v-col v-for="product in filteredProducts" :key="product.id">
+                    <VRow no-gutters>
+                        <VCol v-for="product in filteredProducts" :key="product.id">
                             <v-sheet class="pa-2 ma-2">
-                                <v-col v-for="subCategory in product.subCategory" :key="subCategory.id" cols="12">
+                                <VCol v-for="subCategory in product.subCategory" :key="subCategory.id" cols="12">
                                     <SubCategoryCard :sub-product="subCategory" @handle-cart="handleCartProduct" />
-                                </v-col>
+                                </VCol>
                             </v-sheet>
-                        </v-col>
-                    </v-row>
+                        </VCol>
+                    </VRow>
                 </VCol>
             </VRow>
-        </v-container>
+        </VContainer>
     </v-main>
-</v-layout>
+</VLayout>
 <CartDialog :isVisible="showCartDialog" @handleCloseDialog="showCartDialog = false" :cart-items="filteredItemsInCart" @handleRemovedItems="handleRemovedItems" />
 </template>
