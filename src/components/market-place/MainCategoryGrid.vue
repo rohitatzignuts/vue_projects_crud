@@ -21,7 +21,7 @@ const { handleCart,filteredItemsInCart,handleRemovedItems,showCartDialog } = use
     <VMain class="d-flex align-center justify-center" style="min-height: 300px;">
         <v-container class="bg-surface-variant">
         <VRow no-gutters>
-        <VCol v-for="mainCategory in products" :key="mainCategory.id">
+        <VCol v-for="mainCategory in products" :key="mainCategory.id" sm="12" md="6" xs="12" lg="4">
             <VSheet class="pa-2 ma-2">
                 <MainCategoryCard :category="mainCategory"/>
             </VSheet>

@@ -63,8 +63,8 @@ const removeItem = (id: string) => {
                     <v-window-item value="cart">
                         <VRow>
                             <!-- cart  -->
-                            <VCol cols="7">
-                                <VCard class="ma-4">
+                            <VCol md="8" sm="12" lg="7" xs="12">
+                                <VCard class="ma-2">
                                     <VList>
                                         <v-list-subheader class="mb-4">
                                             My Shopping Bag ({{ props.cartItems ? props.cartItems.length : 0 }} Items)
@@ -93,8 +93,8 @@ const removeItem = (id: string) => {
                                 </VCard>
                             </VCol>
                             <!-- place order  -->
-                            <VCol cols="5">
-                                <VCard class="me-4 my-4" outlined>
+                            <VCol md="4" sm="12" lg="5" xs="12">
+                                <VCard class="ma-2" outlined>
                                     <VCardText>
                                         <h3 class="text-base font-weight-medium mb-3 ms-2">Offer</h3>
                                         <div class="d-flex align-center justify-space-between">
