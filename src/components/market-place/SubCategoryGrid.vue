@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import CartDialog from './CartDialog.vue'
 import SubCategoryCard from './SubCategoryCard.vue'
 import useCart from '@/composables/useCart';
 
-const { handleCart,handleCartProduct,filteredItemsInCart,handleRemovedItems,filteredProducts,showCartDialog } = useCart()
+const { handleCartProduct,filteredProducts } = useCart()
 </script>
 
 <template>
@@ -12,17 +11,18 @@ const { handleCart,handleCartProduct,filteredItemsInCart,handleRemovedItems,filt
         <RouterLink to="/">
             <VBtn variant="outlined" class="me-3" color="info">Home</VBtn>
         </RouterLink>
-        <VBtn variant="outlined" class="me-6" @click="handleCart">
-            <span>Cart</span>
-            <VIcon class="ms-2">mdi-cart</VIcon>
-        </VBtn>
+        <RouterLink to="/market-place/cart">
+            <VBtn variant="outlined" class="me-3" color="info">Cart
+                <VIcon class="ms-2">mdi-cart</VIcon>
+            </VBtn>
+        </RouterLink>  
     </v-app-bar>
-    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+    <VMain class="d-flex align-center justify-center" style="min-height: 300px;">
         <VContainer class="bg-surface-variant">
         <VRow>
             <VCol cols="12" class="ms-2">
                 <RouterLink to="/market-place">
-                    <VBtn variant="outlined" color="#fff">Go Back</VBtn>
+                    <VBtn variant="outlined" color="#fff"><VIcon>mdi-arrow-left-thin</VIcon>Back</VBtn>
                 </RouterLink>
             </VCol>
             <VCol>
@@ -30,7 +30,7 @@ const { handleCart,handleCartProduct,filteredItemsInCart,handleRemovedItems,filt
                         <VCol v-for="product in filteredProducts" :key="product.id">
                             <v-sheet class="pa-2 ma-2">
                                 <VCol v-for="subCategory in product.subCategory" :key="subCategory.id" cols="12">
-                                    <SubCategoryCard :sub-product="subCategory" @handle-cart="handleCartProduct" />
+                                    <SubCategoryCard :sub-product="subCategory" @handleCart="handleCartProduct" />
                                 </VCol>
                             </v-sheet>
                         </VCol>
@@ -38,7 +38,6 @@ const { handleCart,handleCartProduct,filteredItemsInCart,handleRemovedItems,filt
                 </VCol>
             </VRow>
         </VContainer>
-    </v-main>
+    </VMain>
 </VLayout>
-<CartDialog :isVisible="showCartDialog" @handleCloseDialog="showCartDialog = false" :cart-items="filteredItemsInCart" @handleRemovedItems="handleRemovedItems" />
 </template>

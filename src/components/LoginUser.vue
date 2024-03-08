@@ -1,46 +1,30 @@
 <script setup lang="ts">
-import {useLogin} from '@/composables/useLogin.ts'
+import { useLogin } from '@/composables/useLogin.ts'
 
 const { registerData, handleLogin } = useLogin();
 </script>
 
 <template>
-    <vContainer class="d-flex justify-center align-center">
-    <vSheet class="mx-auto pa-10" width="500">
-        <h1>Login...</h1>
-        <form @submit.prevent="handleLogin">
-        <vTextField
-        v-model="registerData.email"
-        label="E-main"
-        type="email"
-        ></vTextField>
-        <vTextField
-        v-model="registerData.password"
-        label="Password"
-        type="password"
-        ></vTextField>
-        <vBtn
-        class="me-4"
-        type="submit"
-        >
-        Login !
-        </vBtn>
-        Not a user ?...
-        <vBtn
-        class="me-4"
-        type="submit"
-        variant="plain"
-        color="white"
-        >
-        <router-link to="/register">Register</router-link>
-        </vBtn>
-        </form>
-    </vSheet>
-    </vContainer>
+    <VContainer class="d-flex justify-center align-center">
+        <VSheet class="mx-auto pa-10" width="500">
+            <h1>Login...</h1>
+            <form @submit.prevent="handleLogin">
+                <VTextField v-model="registerData.email" label="E-main" type="email"></VTextField>
+                <VTextField v-model="registerData.password" label="Password" type="password"></VTextField>
+                <VBtn class="me-4" type="submit">
+                    Login !
+                </VBtn>
+                Not a user ?...
+                <VBtn class="me-4" type="submit" variant="plain" color="white">
+                    <router-link to="/register">Register</router-link>
+                </VBtn>
+            </form>
+        </VSheet>
+    </VContainer>
 </template>
 
 <style>
-a{
+a {
     color: black;
 }
 </style>

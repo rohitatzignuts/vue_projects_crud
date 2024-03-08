@@ -52,52 +52,33 @@ const handleRegister = () => {
 
 <template>
     <VContainer id="container" class="d-flex justify-center align-center">
-    <VSheet class="mx-auto pa-10" width="500">    
-    <VRow>
-    <VCol cols="12">
-        <h1>Register...</h1>
-        <form @submit.prevent="handleRegister">
-        <VTextField
-            v-model="registerData.name"
-            :counter="10"
-            required
-            label="Name"
-        ></VTextField>
+        <VSheet class="mx-auto pa-10" width="500">
+            <VRow>
+                <VCol cols="12">
+                    <h1>Register...</h1>
+                    <form @submit.prevent="handleRegister">
+                        <VTextField v-model="registerData.name" :counter="10" required label="Name"></VTextField>
 
-        <VTextField
-            v-model="registerData.email"
-            required
-            :counter="7"
-            label="E-mail"
-            type="email"
-        ></VTextField>
+                        <VTextField v-model="registerData.email" required :counter="7" label="E-mail" type="email">
+                        </VTextField>
 
-        <VTextField
-            v-model="registerData.password"
-            required
-            label="Password"
-            type="password"
-        ></VTextField>
+                        <VTextField v-model="registerData.password" required label="Password" type="password">
+                        </VTextField>
 
-        <VTextField
-            v-model="registerData.password_confirmation"
-            required
-            label="Confirm Password"
-            type="password"
-        ></VTextField>
+                        <VTextField v-model="registerData.password_confirmation" required label="Confirm Password"
+                            type="password"></VTextField>
 
-        <VBtn
-            class="me-4"
-            type="submit"
-        >
-            Register !
-        </VBtn>
-        Already a user?<VBtn variant="plain"><RouterLink to="/login">Login</RouterLink></VBtn>
-        </form>
-    </VCol>
-    </VRow>
-    </VSheet>
-</VContainer>
+                        <VBtn class="me-4" type="submit">
+                            Register !
+                        </VBtn>
+                        Already a user?<VBtn variant="plain">
+                            <RouterLink to="/login">Login</RouterLink>
+                        </VBtn>
+                    </form>
+                </VCol>
+            </VRow>
+        </VSheet>
+    </VContainer>
 </template>
 
 <style>

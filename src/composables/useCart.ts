@@ -7,7 +7,6 @@ export default function useCart() {
     const router = useRouter()
     const categoryId = ref(router.currentRoute.value.params.id)
     const itemsInCart = ref<SubCategory[]>(JSON.parse(localStorage.getItem('cartItems') || '[]'))
-
     const storedDate = ref<string>(JSON.parse(localStorage.getItem('selectedDate') || ''))
 
     const handleCart = () => {

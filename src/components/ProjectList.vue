@@ -82,37 +82,39 @@ onMounted(() => {
 </script>
 
 <template>
-<VContainer>
-    <div class="d-flex justify-space-between">
-    <VBtn @click="handleCreate" color="info" variant="outlined" class=" my-2">Create</VBtn>
-    <router-link to="market-place">
-        <VBtn color="info" variant="outlined" class=" my-2">
-            <VIcon class="me-2">mdi-cart-outline</VIcon>Market Place
-        </VBtn>
-    </router-link>
-    </div>
-    <VCard title="Projects" flat class="mt-4" width="100%" color="primary">
-        <template v-slot:text>
-            <vTextField v-model="search" label="Search" prepend-inner-icon="mdi-magnify" variant="outlined" hide-details single-line></vTextField>
-        </template>
-
-        <VDataTable :headers="headers" :items="projects" :search="search">
-            <template #item.actions="{ item }">
-                
-                <VBtn @click="viewProjectDetails(item)" color="primary" class="mx-2 my-2">
-                    <VIcon>mdi-eye</VIcon>
+    <VContainer>
+        <div class="d-flex justify-space-between">
+            <VBtn @click="handleCreate" color="info" variant="outlined" class=" my-2">Create</VBtn>
+            <router-link to="market-place">
+                <VBtn color="info" variant="outlined" class=" my-2">
+                    <VIcon class="me-2">mdi-cart-outline</VIcon>Market Place
                 </VBtn>
-                <VBtn @click="editProjectDetails(item.id)" variant="tonal" class="mx-2 my-2">
-                    <VIcon>mdi-pencil</VIcon>
-                </VBtn>
-                <VBtn @click="handleDelete(item.id)" color="error" class="mx-2 my-2">
-                    <VIcon>mdi-delete</VIcon>
-                </VBtn>
+            </router-link>
+        </div>
+        <VCard title="Projects" flat class="mt-4" width="100%" color="primary">
+            <template v-slot:text>
+                <vTextField v-model="search" label="Search" prepend-inner-icon="mdi-magnify" variant="outlined"
+                    hide-details single-line></vTextField>
             </template>
-        </VDataTable>
-    </VCard>
-</VContainer>
-<project-show :project="projectData" :is-visible="showDialog" @handleCloseDialog="showDialog=false"/>
-<project-form @handleList="fetchProjects" :viewDialog="editDialog" :editing-project-id="editingProjectId" @handleDialog="editDialog=false"/> 
-<project-form :viewDialog="createDialog" @handleDialog="createDialog=false" @handleList="fetchProjects" />
+
+            <VDataTable :headers="headers" :items="projects" :search="search">
+                <template #item.actions="{ item }">
+
+                    <VBtn @click="viewProjectDetails(item)" color="primary" class="mx-2 my-2">
+                        <VIcon>mdi-eye</VIcon>
+                    </VBtn>
+                    <VBtn @click="editProjectDetails(item.id)" variant="tonal" class="mx-2 my-2">
+                        <VIcon>mdi-pencil</VIcon>
+                    </VBtn>
+                    <VBtn @click="handleDelete(item.id)" color="error" class="mx-2 my-2">
+                        <VIcon>mdi-delete</VIcon>
+                    </VBtn>
+                </template>
+            </VDataTable>
+        </VCard>
+    </VContainer>
+    <ProjectShow :project="projectData" :isVisible="showDialog" @handleCloseDialog="showDialog = false" />
+    <ProjectForm @handleList="fetchProjects" :viewDialog="editDialog" :editingProjectId="editingProjectId"
+        @handleDialog="editDialog = false" />
+    <ProjectForm :viewDialog="createDialog" @handleDialog="createDialog = false" @handleList="fetchProjects" />
 </template>

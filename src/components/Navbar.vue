@@ -1,4 +1,5 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+
 <script setup lang="ts">
 import Swal from 'sweetalert2'
 import axios from 'axios'
@@ -48,29 +49,35 @@ const handleLogout = () => {
   })
 }
 watch(locale, (newlocale) => {
-      localStorage.setItem("locale", newlocale);
+  localStorage.setItem("locale", newlocale);
 });
 </script>
 
 <template>
   <VRow align="center" class="pa-14 ma-2 justify-space-between">
-    <VCol cols="6"  sm="2">
+    <VCol cols="6" sm="2">
       <div>
-        <router-link to="/"><h3>{{t("Project Master")}}</h3></router-link>
+        <router-link to="/">
+          <h3>{{ t("Project Master") }}</h3>
+        </router-link>
       </div>
     </VCol>
-    <VCol cols="6"  sm="10">
+    <VCol cols="6" sm="10">
       <div id="links" class="d-flex ga-2 align-center justify-end">
-        <router-link to="/"><v-btn variant="outlined" color="info">{{t("Home")}}</v-btn></router-link>
-        <router-link to="/user-profile"><v-btn variant="outlined">{{t("Profile")}}</v-btn></router-link>
-        <v-btn variant="outlined" @click="handleLogout">{{t("Logout")}}</v-btn>
+        <router-link to="/">
+          <v-btn variant="outlined" color="info">{{ t("Home") }}</v-btn>
+        </router-link>
+        <router-link to="/user-profile">
+          <v-btn variant="outlined">{{ t("Profile") }}</v-btn>
+        </router-link>
+        <v-btn variant="outlined" @click="handleLogout">{{ t("Logout") }}</v-btn>
         <VIcon class="mx-2">mdi-translate</VIcon>
         <div>
           <select v-model="locale">
             <option>en-US</option>
             <option>sp-SP</option>
           </select>
-          </div>
+        </div>
       </div>
     </VCol>
   </VRow>
@@ -78,13 +85,14 @@ watch(locale, (newlocale) => {
 
 <style scoped>
 a {
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
 }
-select{
-  color: white;
-  border: 1px solid white;
-  padding: 0.25rem .75rem;
-  border-radius: 5px;
+
+select {
+    color: white;
+    border: 1px solid white;
+    padding: 0.25rem .75rem;
+    border-radius: 5px;
 }
 </style>

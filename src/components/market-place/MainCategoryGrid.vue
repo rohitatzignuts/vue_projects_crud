@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import MainCategoryCard from './MainCategoryCard.vue'
-import CartDialog from './CartDialog.vue'
 import { products } from '../../Product';
-import useCart from '@/composables/useCart';
-
-const { handleCart,filteredItemsInCart,handleRemovedItems,showCartDialog } = useCart()
 </script>
 
 <template>
@@ -13,10 +9,15 @@ const { handleCart,filteredItemsInCart,handleRemovedItems,showCartDialog } = use
         <RouterLink to="/">
             <VBtn variant="outlined" class="me-3" color="info">Home</VBtn>
         </RouterLink>
-        <VBtn variant="outlined" class="me-6" @click="handleCart">
+        <RouterLink to="/market-place/cart">
+            <VBtn variant="outlined" class="me-3" color="info">Cart
+                <VIcon class="ms-2">mdi-cart</VIcon>
+            </VBtn>
+        </RouterLink>
+        <!-- <VBtn variant="outlined" class="me-6" @click="handleCart">
             <span>Cart</span>
             <VIcon class="ms-2">mdi-cart</VIcon>
-        </VBtn>
+        </VBtn> -->
     </v-app-bar>
     <VMain class="d-flex align-center justify-center" style="min-height: 300px;">
         <v-container class="bg-surface-variant">
@@ -30,5 +31,4 @@ const { handleCart,filteredItemsInCart,handleRemovedItems,showCartDialog } = use
     </v-container>
     </VMain>
 </VLayout>
-<CartDialog :isVisible="showCartDialog" @handleCloseDialog="showCartDialog = false" :cart-items="filteredItemsInCart" @handleRemovedItems="handleRemovedItems" />
 </template>

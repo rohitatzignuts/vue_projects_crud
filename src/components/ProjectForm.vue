@@ -11,11 +11,11 @@ const project = ref<Project>({
   projectDescription: ''
 })
 
-const emits = defineEmits(['handleList','handleDialog'])
-const props = defineProps<{ editingProjectId?: number, viewDialog: boolean  }>()
+const emits = defineEmits(['handleList', 'handleDialog'])
+const props = defineProps<{ editingProjectId?: number, viewDialog: boolean }>()
 
 const handleCloseDialog = () => {
-    emits('handleDialog',false)
+  emits('handleDialog', false)
 }
 
 const getProject = () => {
@@ -64,7 +64,7 @@ const saveProject = () => {
   })
     .then(() => {
       emits('handleList', true)
-      emits('handleDialog',false)
+      emits('handleDialog', false)
       Swal.fire({
         icon: 'success',
         title: 'Project saved successfully!',
@@ -89,7 +89,7 @@ const saveProject = () => {
 }
 
 watchEffect(() => {
-  if(props.editingProjectId){
+  if (props.editingProjectId) {
     getProject()
   }
 })
@@ -105,26 +105,17 @@ watch(() => props.viewDialog, (value) => {
 })
 
 </script>
-
 <template>
-  <div class="text-center d-inline " >
+  <div class="text-center d-inline ">
     <VDialog :model-value="viewDialog" max-width="600">
       <VCard prepend-icon="mdi-pencil" :title="`${projectId ? 'Edit' : 'Create'} Project`">
         <VCardText>
           <VRow dense>
             <VCol cols="12">
-              <VTextField
-                v-model="project.projectName"
-                label="Project Name*"
-                required
-              ></VTextField>
+              <VTextField v-model="project.projectName" label="Project Name*" required></VTextField>
             </VCol>
             <VCol cols="12">
-              <VTextField
-                v-model="project.projectDescription"
-                label="Project Description*"
-                required
-              ></VTextField>
+              <VTextField v-model="project.projectDescription" label="Project Description*" required></VTextField>
             </VCol>
           </VRow>
           <small class="text-caption text-medium-emphasis">*indicates required field</small>
