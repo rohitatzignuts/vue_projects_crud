@@ -2,6 +2,7 @@ import { computed, ref, watchEffect } from 'vue'
 import { products, type SubCategory } from '../Product'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
+
 export default function useCart() {
     const showCartDialog = ref<boolean>(false)
     const router = useRouter()
