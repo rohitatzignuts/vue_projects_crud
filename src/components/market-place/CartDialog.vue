@@ -187,6 +187,7 @@ const orderConfirmed = () => {
                       <h3 class="text-base font-weight-medium">$ {{ cartTotal }}</h3>
                     </div>
                     <VBtn
+                      v-if="props.cartItems.length"
                       class="text-none mb-4"
                       color="success"
                       size="x-large"
