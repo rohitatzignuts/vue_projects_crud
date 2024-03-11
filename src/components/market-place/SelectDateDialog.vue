@@ -14,15 +14,17 @@ const { validateDate } = useCart()
 const handleSelectedDate = () => {
     if (selectedDate.value) {
         isDialogVisible.value = false
+        const utcDate = new Date(selectedDate.value.getTime() - (selectedDate.value.getTimezoneOffset() * 60000))
         localStorage.setItem(
             'selectedDate',
-            JSON.stringify(selectedDate.value.toISOString().split('T')[0])
+            JSON.stringify(utcDate.toISOString().split('T')[0])
         )
     } else {
         alert('Select a date to Continue...!')
     }
     validateDate()
 }
+
 
 </script>
 
