@@ -8,13 +8,13 @@ export default function useCart() {
     const categoryId = ref(router.currentRoute.value.params.id)
     const itemsInCart = ref<SubCategory[]>(JSON.parse(localStorage.getItem('cartItems') || '[]'))
     const storedDateString = localStorage.getItem('selectedDate')
-    const storedDate = ref<string>(storedDateString && storedDateString !== 'undefined' ? JSON.parse(storedDateString) : '')
+    const storedDate = ref<string>(
+        storedDateString && storedDateString !== 'undefined' ? JSON.parse(storedDateString) : ''
+    )
 
     //add items to the cart
     const handleCartProduct = (cartProduct: SubCategory) => {
-        const existingItem = itemsInCart.value.find(
-            (item) => item.id === cartProduct.id 
-        ) 
+        const existingItem = itemsInCart.value.find((item) => item.id === cartProduct.id)
         if (existingItem) {
             existingItem.quantity++
         } else {
@@ -28,14 +28,14 @@ export default function useCart() {
         }
         localStorage.setItem('cartItems', JSON.stringify(itemsInCart.value))
     }
-    
+
     const validateDate = () => {
-        const currentDate = JSON.parse(localStorage.getItem('selectedDate') || '');
+        const currentDate = JSON.parse(localStorage.getItem('selectedDate') || '')
         if (currentDate !== storedDate.value) {
-            localStorage.setItem('cartItems', '[]');
+            localStorage.setItem('cartItems', '[]')
         }
     }
-    
+
     //filter removed items
     const handleRemovedItems = (id: string) => {
         itemsInCart.value = itemsInCart.value.filter((item) => item.id !== id)

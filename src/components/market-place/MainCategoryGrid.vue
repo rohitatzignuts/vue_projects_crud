@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MainCategoryCard from './MainCategoryCard.vue'
-import { products } from '../../Product';
+import { products } from '../../Product'
 </script>
 
 <template>
@@ -14,12 +14,8 @@ import { products } from '../../Product';
                     <VIcon class="ms-2">mdi-cart</VIcon>
                 </VBtn>
             </RouterLink>
-            <!-- <VBtn variant="outlined" class="me-6" @click="handleCart">
-            <span>Cart</span>
-            <VIcon class="ms-2">mdi-cart</VIcon>
-        </VBtn> -->
         </v-app-bar>
-        <VMain class="d-flex align-center justify-center" style="min-height: 300px;">
+        <VMain class="d-flex align-center justify-center" style="min-height: 300px">
             <v-container class="bg-surface-variant">
                 <VRow no-gutters>
                     <VCol v-for="mainCategory in products" :key="mainCategory.id" sm="12" md="6" xs="12" lg="4">

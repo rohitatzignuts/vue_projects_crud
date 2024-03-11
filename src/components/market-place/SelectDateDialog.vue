@@ -1,20 +1,23 @@
 <script lang="ts" setup>
-import useCart from '@/composables/useCart';
-import { ref } from 'vue'
+import useCart from '@/composables/useCart'
+import { ref, computed } from 'vue'
 
 const isDialogVisible = ref<boolean>(true)
-const selectedDate = ref<string>('')
-const today = new Date();
-const day = String(today.getDate()).padStart(2, '0');
-const month = String(today.getMonth() + 1).padStart(2, '0');
-const year = today.getFullYear();
-const minDate = `${year}-${month}-${day}`;
-const  {validateDate} = useCart()
+const selectedDate = ref<Date | null>(null)
+const today = new Date()
+const day = String(today.getDate()).padStart(2, '0')
+const month = String(today.getMonth() + 1).padStart(2, '0')
+const year = today.getFullYear()
+const minDate = `${year}-${month}-${day}`
+const { validateDate } = useCart()
 
 const handleSelectedDate = () => {
     if (selectedDate.value) {
         isDialogVisible.value = false
-        localStorage.setItem('selectedDate', JSON.stringify(selectedDate.value));
+        localStorage.setItem(
+            'selectedDate',
+            JSON.stringify(selectedDate.value.toISOString().split('T')[0])
+        )
     } else {
         alert('Select a date to Continue...!')
     }
@@ -27,20 +30,15 @@ const handleSelectedDate = () => {
         <!-- Dialog Content -->
         <VCard>
             <VCardText>
-                <v-row>
-                    <v-col cols="12">
-                        <v-text-field v-model="selectedDate" label="Select Date" name="select-date" type="date"
-                            :min="minDate" outlined required></v-text-field>
-                    </v-col>
-                </v-row>
+                <div>
+                    <VDatePicker v-model="selectedDate" :min="minDate" outlined required fluid></VDatePicker>
+                </div>
             </VCardText>
             <VCardText class="d-flex justify-end flex-wrap ga-3">
                 <VRow>
                     <VCol>
                         <RouterLink to="/">
-                            <VBtn color="info" size="large" variant="outlined" block>
-                                Go Back
-                            </VBtn>
+                            <VBtn color="info" size="large" variant="outlined" block> Go Back </VBtn>
                         </RouterLink>
                     </VCol>
                     <VCol>

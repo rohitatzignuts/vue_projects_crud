@@ -1,40 +1,39 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 interface FormData {
-    name: string;
-    phone: string;
-    email: string;
-    address1: string;
-    address2: string;
-    city: string;
-    state: string;
-    postalCode: string;
-    country: string;
-    useDefaultAddress: boolean;
+    name: string
+    phone: string
+    email: string
+    address1: string
+    address2: string
+    city: string
+    state: string
+    postalCode: string
+    country: string
+    useDefaultAddress: boolean
 }
 
 const formData = ref<FormData>({
-    name: "",
-    phone: "",
-    email: "",
-    address1: "",
-    address2: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    country: "",
-    useDefaultAddress: false,
-});
+    name: '',
+    phone: '',
+    email: '',
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
+    postalCode: '',
+    country: '',
+    useDefaultAddress: false
+})
 
 const clearForm = () => {
     formData.value = {}
-};
+}
 const submitForm = () => {
-    console.log("Form Data:", formData.value);
+    console.log('Form Data:', formData.value)
     clearForm()
-};
-
+}
 </script>
 
 <template>
@@ -50,13 +49,8 @@ const submitForm = () => {
         <VSelect v-model="formData.country" label="Country"></VSelect>
         <VCheckbox v-model="formData.useDefaultAddress" label="Use as default address"></VCheckbox>
         <div class="d-flex justify-space-start align-center">
-            <VBtn class="me-4" type="submit" color="success" variant="outlined">
-                Submit
-            </VBtn>
-
-            <VBtn @click="clearForm" variant="outlined">
-                Clear
-            </VBtn>
+            <VBtn class="me-4" type="submit" color="success" variant="outlined"> Submit </VBtn>
+            <VBtn @click="clearForm" variant="outlined"> Clear </VBtn>
         </div>
     </form>
 </template>

@@ -6,7 +6,6 @@ import { useRouter } from 'vue-router'
 
 const isorderConfirmed = ref<boolean>(false)
 const router = useRouter()
-const orderDate = ref(JSON.parse(localStorage.getItem('selectedDate') || ''))
 const tab = ref<any>(null)
 
 const props = defineProps<{
@@ -24,6 +23,26 @@ const removeItem = (id: string) => {
 
 const prevRoute = () => {
   router.go(-1)
+}
+
+const decressQuantity = (id: string) => {
+  if (Array.isArray(props.cartItems)) {
+    const item = props.cartItems.find((item) => item.id === id)
+    if (item && item.quantity > 1) {
+      item.quantity--
+      localStorage.setItem('cartItems', JSON.stringify(props.cartItems))
+    }
+  }
+}
+
+const increseQuantity = (id: string) => {
+  if (Array.isArray(props.cartItems)) {
+    const item = props.cartItems.find((item) => item.id === id)
+    if (item) {
+      item.quantity++
+      localStorage.setItem('cartItems', JSON.stringify(props.cartItems))
+    }
+  }
 }
 
 const cartTotal = computed(() => {
@@ -62,7 +81,7 @@ const orderConfirmed = () => {
             Cart
           </VTab>
 
-          <VTab value="address">
+          <VTab value="address" v-if="props.cartItems.length">
             <VIcon class="my-2">mdi-office-building-marker</VIcon>
             Address
           </VTab>
@@ -98,13 +117,28 @@ const orderConfirmed = () => {
                           </div>
                           <div class="d-flex flex-column align-start">
                             <h4 class="my-2">$ {{ item.price }}</h4>
-                            <input
-                              type="number"
-                              min="1"
-                              value="1"
-                              class="border rounded-lg pa-1"
-                              v-model="item.quantity"
-                            />
+                            <div class="d-flex align-center">
+                              <VBtn
+                                icon="mdi-minus"
+                                size="x-small"
+                                variant="text"
+                                @click="decressQuantity(item.id)"
+                              />
+                              <input
+                                type="number"
+                                min="1"
+                                value="1"
+                                class="border rounded-lg pa-1"
+                                v-model="item.quantity"
+                                disabled
+                              />
+                              <VBtn
+                                icon="mdi-plus"
+                                size="x-small"
+                                variant="text"
+                                @click="increseQuantity(item.id)"
+                              />
+                            </div>
                           </div>
                         </VCol>
                       </VRow>
@@ -133,10 +167,6 @@ const orderConfirmed = () => {
                       <div class="d-flex justify-space-between mb-2">
                         <span>Bag Total</span>
                         <span>{{ cartTotal }}</span>
-                      </div>
-                      <div class="d-flex justify-space-between mb-2">
-                        <span>Order Date</span>
-                        <span>{{ orderDate }}</span>
                       </div>
                       <div class="d-flex justify-space-between">
                         <span>Delivery Charges</span>
@@ -170,14 +200,14 @@ const orderConfirmed = () => {
               </VCol>
             </VRow>
           </v-window-item>
-          <v-window-item value="address">
-            <VCard v-if="isorderConfirmed && props.cartItems.length">
+          <v-window-item value="address" >
+            <VCard v-if="isorderConfirmed">
               <VCardText>
                 <CartAddress />
               </VCardText>
             </VCard>
             <VCard v-else>
-              <VCardText> Your Cart is either empty or You havent confirmed your Order </VCardText>
+              <VCardText> Confirm Order To procede </VCardText>
             </VCard>
           </v-window-item>
         </v-window>
