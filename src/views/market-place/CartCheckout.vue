@@ -6,5 +6,5 @@ const { itemsInCart,handleRemovedItems } = useCart()
 </script>
 
 <template>
-    <CartDialog :cartItems="itemsInCart" @itemsInCart="handleRemovedItems" />
+    <CartDialog :cartItems="itemsInCart" @handleRemovedItems="handleRemovedItems" />
 </template>

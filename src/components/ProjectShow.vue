@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type Project from '@/project';
 
-const emit = defineEmits(['handleCloseDialog'])
+const emit = defineEmits<{
+    (event : 'handleCloseDialog' , payload : boolean) : void
+}>()
+
 defineProps<{
     project: Project
     isVisible: boolean

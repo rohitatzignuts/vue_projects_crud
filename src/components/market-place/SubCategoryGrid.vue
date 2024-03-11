@@ -30,7 +30,7 @@ const { handleCartProduct,filteredProducts } = useCart()
                         <VCol v-for="product in filteredProducts" :key="product.id">
                             <v-sheet class="pa-2 ma-2">
                                 <VCol v-for="subCategory in product.subCategory" :key="subCategory.id" cols="12">
-                                    <SubCategoryCard :sub-product="subCategory" @handleCart="handleCartProduct" />
+                                    <SubCategoryCard :sub-product="subCategory"  @handleCart = "handleCartProduct" />
                                 </VCol>
                             </v-sheet>
                         </VCol>

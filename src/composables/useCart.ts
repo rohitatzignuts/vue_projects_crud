@@ -1,4 +1,4 @@
-import { ref, watchEffect, watch } from 'vue'
+import { ref } from 'vue'
 import { products, type SubCategory } from '../Product'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
@@ -7,10 +7,14 @@ export default function useCart() {
     const router = useRouter()
     const categoryId = ref(router.currentRoute.value.params.id)
     const itemsInCart = ref<SubCategory[]>(JSON.parse(localStorage.getItem('cartItems') || '[]'))
-    const storedDate = ref<string>(JSON.parse(localStorage.getItem('selectedDate') || ''))
+    const storedDateString = localStorage.getItem('selectedDate')
+    const storedDate = ref<string>(storedDateString && storedDateString !== 'undefined' ? JSON.parse(storedDateString) : '')
 
+    //add items to the cart
     const handleCartProduct = (cartProduct: SubCategory) => {
-        const existingItem = itemsInCart.value.find(item => item.id === cartProduct.id)
+        const existingItem = itemsInCart.value.find(
+            (item) => item.id === cartProduct.id 
+        ) 
         if (existingItem) {
             existingItem.quantity++
         } else {
@@ -24,27 +28,27 @@ export default function useCart() {
         }
         localStorage.setItem('cartItems', JSON.stringify(itemsInCart.value))
     }
-
-    watchEffect(() => {
-        storedDate.value
-    })
     
-    watch(storedDate, (newDate, oldDate) => {
-        itemsInCart.value = [] 
-        localStorage.setItem('cartItems', '[]')
-    })
-
+    const validateDate = () => {
+        const currentDate = JSON.parse(localStorage.getItem('selectedDate') || '');
+        if (currentDate !== storedDate.value) {
+            localStorage.setItem('cartItems', '[]');
+        }
+    }
+    
+    //filter removed items
     const handleRemovedItems = (id: string) => {
-        itemsInCart.value = itemsInCart.value.filter(item => item.id !== id)
+        itemsInCart.value = itemsInCart.value.filter((item) => item.id !== id)
         localStorage.setItem('cartItems', JSON.stringify(itemsInCart.value))
     }
 
-    const filteredProducts = ref(itemsInCart.value.filter(product => product.id === categoryId.value))
+    const filteredProducts = ref(products.value.filter((product) => product.id === categoryId.value))
 
     return {
         handleCartProduct,
         handleRemovedItems,
         filteredProducts,
+        validateDate,
         itemsInCart,
         storedDate,
         categoryId

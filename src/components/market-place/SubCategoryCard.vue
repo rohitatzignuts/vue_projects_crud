@@ -3,7 +3,9 @@ import { type SubCategory } from '@/Product';
 import { ref } from 'vue'
 
 const show = ref<boolean>(false)
-const emits = defineEmits(['handleCart'])
+const emits = defineEmits<{
+    (event: 'handleCart', payload: SubCategory): void;
+}>()
 
 defineProps<{
     subProduct: SubCategory

@@ -11,7 +11,11 @@ const project = ref<Project>({
   projectDescription: ''
 })
 
-const emits = defineEmits(['handleList', 'handleDialog'])
+const emits = defineEmits<{
+    (event : 'handleRemovedItems' ,payload : Array<Project>) :void,
+    (event : 'handleDialog' ,payload : boolean) :void,
+}>()
+
 const props = defineProps<{ editingProjectId?: number, viewDialog: boolean }>()
 
 const handleCloseDialog = () => {
