@@ -88,7 +88,6 @@ a {
     text-decoration: none;
     color: white;
 }
-
 select {
     color: white;
     border: 1px solid white;

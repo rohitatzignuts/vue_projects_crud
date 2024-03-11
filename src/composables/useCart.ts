@@ -29,6 +29,7 @@ export default function useCart() {
         localStorage.setItem('cartItems', JSON.stringify(itemsInCart.value))
     }
 
+    //remove items when date is changed
     const validateDate = () => {
         const currentDate = JSON.parse(localStorage.getItem('selectedDate') || '')
         if (currentDate !== storedDate.value) {

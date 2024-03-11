@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import useCart from '@/composables/useCart'
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 const isDialogVisible = ref<boolean>(true)
 const selectedDate = ref<Date | null>(null)
@@ -23,6 +23,7 @@ const handleSelectedDate = () => {
     }
     validateDate()
 }
+
 </script>
 
 <template>

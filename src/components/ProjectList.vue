@@ -18,6 +18,7 @@ const showDialog = ref<Boolean>(false)
 const editDialog = ref<Boolean>(false)
 const createDialog = ref<Boolean>(false)
 const projects = ref<Array<Project>>([]);
+    
 const fetchProjects = () => {
     axios.get<Project[]>('/api/projects')
         .then(res => {
