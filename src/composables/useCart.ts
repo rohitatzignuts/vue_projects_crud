@@ -2,7 +2,6 @@ import { ref, watchEffect, watch } from 'vue'
 import { products, type SubCategory } from '../Product'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
-
 export default function useCart() {
     const router = useRouter()
     const categoryId = ref(router.currentRoute.value.params.id)

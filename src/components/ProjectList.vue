@@ -96,8 +96,10 @@ onMounted(() => {
                 <vTextField v-model="search" label="Search" prepend-inner-icon="mdi-magnify" variant="outlined"
                     hide-details single-line></vTextField>
             </template>
+
             <VDataTable :headers="headers" :items="projects" :search="search">
                 <template #item.actions="{ item }">
+
                     <VBtn @click="viewProjectDetails(item)" color="primary" class="mx-2 my-2">
                         <VIcon>mdi-eye</VIcon>
                     </VBtn>
