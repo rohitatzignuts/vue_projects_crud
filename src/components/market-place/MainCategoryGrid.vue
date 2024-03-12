@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import MainCategoryCard from './MainCategoryCard.vue'
 import { products } from '../../Product'
-import MarketPlaceLayout from '@/layouts/MarketPlace.vue'
 </script>
 
 <template>
