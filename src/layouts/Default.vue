@@ -6,9 +6,9 @@ import Navbar from '@/components/Navbar.vue'
 <template>
     <VContainer>
         <VLayout class="rounded rounded-md">
-            <v-app-bar color="surface-variant" prominent>
+            <VAppBar color="surface-variant" prominent>
                 <Navbar />
-            </v-app-bar>
+            </VAppBar>
             <VMain class="d-flex align-center justify-center" style="min-height: 300px;">
                 <slot name="content" />
             </VMain>

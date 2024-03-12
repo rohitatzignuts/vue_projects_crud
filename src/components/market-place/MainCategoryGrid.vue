@@ -1,30 +1,24 @@
 <script setup lang="ts">
 import MainCategoryCard from './MainCategoryCard.vue'
 import { products } from '../../Product'
+import MarketPlaceLayout from '@/layouts/MarketPlace.vue'
 </script>
 
 <template>
-    <VLayout class="rounded rounded-md my-10">
-        <v-app-bar title="Market Place" class="px-11">
-            <RouterLink to="/">
-                <VBtn variant="outlined" class="me-3" color="info">Home</VBtn>
-            </RouterLink>
-            <RouterLink to="/market-place/cart">
-                <VBtn variant="outlined" class="me-3" color="info">Cart
-                    <VIcon class="ms-2">mdi-cart</VIcon>
-                </VBtn>
-            </RouterLink>
-        </v-app-bar>
-        <VMain class="d-flex align-center justify-center" style="min-height: 300px">
-            <v-container class="bg-surface-variant">
-                <VRow no-gutters>
-                    <VCol v-for="mainCategory in products" :key="mainCategory.id" sm="12" md="6" xs="12" lg="4">
-                        <VSheet class="pa-2 ma-2">
-                            <MainCategoryCard :category="mainCategory" />
-                        </VSheet>
-                    </VCol>
-                </VRow>
-            </v-container>
-        </VMain>
-    </VLayout>
+    <VContainer class="bg-surface-variant my-0">
+        <VRow no-gutters>
+            <VCol
+                v-for="mainCategory in products"
+                :key="mainCategory.id"
+                sm="12"
+                md="6"
+                xs="12"
+                lg="4"
+            >
+                <VSheet class="pa-2 ma-2">
+                    <MainCategoryCard :category="mainCategory" />
+                </VSheet>
+            </VCol>
+        </VRow>
+    </VContainer>
 </template>

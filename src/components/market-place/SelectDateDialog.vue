@@ -24,8 +24,6 @@ const handleSelectedDate = () => {
     }
     validateDate()
 }
-
-
 </script>
 
 <template>

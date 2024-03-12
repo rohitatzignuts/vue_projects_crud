@@ -19,13 +19,13 @@ export default function useCart() {
             existingItem.quantity++
         } else {
             itemsInCart.value.push({ ...cartProduct, quantity: 1, date: storedDate.value })
-            Swal.fire({
-                icon: 'success',
-                title: 'Item Added to the Cart!',
-                showConfirmButton: false,
-                timer: 500
-            })
         }
+        Swal.fire({
+            icon: 'success',
+            title: 'Item Added to the Cart!',
+            showConfirmButton: false,
+            timer: 500
+        })
         localStorage.setItem('cartItems', JSON.stringify(itemsInCart.value))
     }
 

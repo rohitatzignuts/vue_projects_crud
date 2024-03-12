@@ -50,9 +50,51 @@ export function useLogin() {
             })
     }
 
+    const handleLogout = () => {
+        const token = localStorage.getItem('token')
+        Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes !'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios
+                    .post('api/logout', null, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    })
+                    .then((response: any) => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Logged out successfully!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        router.push('/login')
+                        localStorage.removeItem('token')
+                        return response
+                    })
+                    .catch((error: any) => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An Error Occurred!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        return error
+                    })
+            }
+        })
+    }
+
     return {
         token,
         registerData,
-        handleLogin
+        handleLogin,
+        handleLogout
     }
 }

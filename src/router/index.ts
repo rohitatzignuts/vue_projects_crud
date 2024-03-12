@@ -7,7 +7,6 @@ import UserProfileVue from '@/views/UserProfile.vue'
 import MainCategory from '@/views/market-place/MainCategory.vue'
 import SubCategory from '@/views/market-place/SubCategory.vue'
 import CartCheckout from '@/views/market-place/CartCheckout.vue'
-
 const routes = [
   {
     path: '/',
@@ -28,11 +27,13 @@ const routes = [
   },
   {
     path: '/market-place',
-    component: MainCategory
+    component: MainCategory,
+    meta: { layout: 'market', requiresAuth: true },
   },
   {
     path: '/market-place/category/:id',
-    component: SubCategory
+    component: SubCategory,
+    meta: { layout: 'market', requiresAuth: true },
   },
   {
     path: '/market-place/cart',
